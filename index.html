@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training System Audit — Auditoría Lean de Sistema de Entrenamiento</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090D;
+      --bg-card: rgba(12, 18, 30, 0.7);
+      --border: rgba(255,255,255,0.06);
+      --border-active: rgba(99, 179, 237, 0.25);
+      --text: #EEF2F7;
+      --text-muted: #6B7A99;
+      --text-dim: #3D4A60;
+      --blue: #63B3ED;
+      --blue-dark: #2B6CB0;
+      --cyan: #4FD1C5;
+      --green: #68D391;
+      --yellow: #F6E05E;
+      --red: #FC8181;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── NOISE TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .serif { font-family: 'DM Serif Display', serif; }
+    .mono  { font-family: 'DM Mono', monospace; }
+
+    /* ── GRADIENT TEXT ── */
+    .grad {
+      background: linear-gradient(130deg, #63B3ED 0%, #4FD1C5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── GLOW AMBIENT ── */
+    .glow-hero {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,179,237,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── GLASS CARD ── */
+    .glass {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+
+    .glass-active {
+      background: var(--bg-card);
+      border: 1px solid var(--border-active);
+      backdrop-filter: blur(16px);
+    }
+
+    /* ── TERMINAL ── */
+    .terminal {
+      font-family: 'DM Mono', monospace;
+      background: rgba(5, 8, 14, 0.95);
+      border: 1px solid rgba(99,179,237,0.12);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.5),
+        0 32px 64px -16px rgba(0,0,0,0.6),
+        0 0 80px rgba(99,179,237,0.06);
+    }
+
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+
+    /* ── BUTTON ── */
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(130deg, #63B3ED, #4FD1C5);
+      color: #07090D;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 16px 36px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: -0.01em;
+    }
+    .btn-main::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(99,179,237,0.35); }
+    .btn-main:hover::after { opacity: 1; }
+    .btn-main:active { transform: translateY(0); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      letter-spacing: -0.01em;
+    }
+    .btn-ghost:hover {
+      border-color: var(--border-active);
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    /* ── DIVIDER LINE ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+    @keyframes scaleIn  { from { opacity:0; transform:scale(0.97); } to { opacity:1; transform:scale(1); } }
+    @keyframes slideL   { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes slideR   { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes scanLine {
+      0%   { transform: translateY(-100%); opacity:0; }
+      30%  { opacity: 0.4; }
+      70%  { opacity: 0.4; }
+      100% { transform: translateY(500%); opacity:0; }
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
+
+    .anim { opacity:0; animation-fill-mode: both; }
+    .fu  { animation: fadeUp  0.65s ease-out forwards; }
+    .fi  { animation: fadeIn  0.65s ease-out forwards; }
+    .si  { animation: scaleIn 0.55s ease-out forwards; }
+    .sl  { animation: slideL  0.6s  ease-out forwards; }
+    .sr  { animation: slideR  0.6s  ease-out forwards; }
+
+    .d1 { animation-delay: 80ms; }
+    .d2 { animation-delay: 160ms; }
+    .d3 { animation-delay: 240ms; }
+    .d4 { animation-delay: 320ms; }
+    .d5 { animation-delay: 400ms; }
+    .d6 { animation-delay: 480ms; }
+
+    /* ── SECTION RADIAL ── */
+    .radial-section {
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99,179,237,0.055) 0%, transparent 70%);
+    }
+    .radial-bottom {
+      background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(79,209,197,0.04) 0%, transparent 70%);
+    }
+
+    /* ── STEP CONNECTOR ── */
+    .steps-grid { position: relative; }
+    .step-line {
+      position: absolute;
+      top: 28px;
+      left: calc(12.5% + 28px);
+      right: calc(12.5% + 28px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-active), transparent);
+      display: none;
+    }
+    @media(min-width:768px){ .step-line { display: block; } }
+
+    /* ── PROBLEM CARD HOVER ── */
+    .prob-card {
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      border-left: 2px solid transparent;
+    }
+    .prob-card:hover {
+      border-left-color: var(--blue);
+      transform: translateX(4px);
+      background: rgba(99,179,237,0.04);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity:0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform: translateY(0); }
+    .reveal.delay-1 { transition-delay: 0.1s; }
+    .reveal.delay-2 { transition-delay: 0.2s; }
+    .reveal.delay-3 { transition-delay: 0.3s; }
+    .reveal.delay-4 { transition-delay: 0.4s; }
+    .reveal.delay-5 { transition-delay: 0.5s; }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid rgba(99,179,237,0.2);
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: rgba(99,179,237,0.05);
+    }
+
+    /* ── QUOTE MARK ── */
+    .quote-mark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 6rem;
+      line-height: 1;
+      color: rgba(99,179,237,0.12);
+      position: absolute;
+      top: -10px;
+      left: 0;
+    }
+
+    /* ── LEAD MAGNET BOX ── */
+    .magnet-box {
+      background: linear-gradient(135deg, rgba(99,179,237,0.06), rgba(79,209,197,0.04));
+      border: 1px solid rgba(99,179,237,0.15);
+      border-radius: 16px;
+    }
+
+    /* ── PRICE TAG ── */
+    .price-tag {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    /* terminal syntax */
+    .kw  { color: #F687B3; }
+    .str { color: #68D391; }
+    .num { color: #F6E05E; }
+    .prop{ color: #63B3ED; }
+    .cmt { color: #3D4A60; }
+    .err { color: #FC8181; }
+    .ok  { color: #68D391; }
+    .warn{ color: #F6E05E; }
+  </style>
+</head>
+
+<body>
+
+<!-- ────────────────────────────────────────────
+  HERO
+──────────────────────────────────────────── -->
+<section class="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+
+  <!-- ambient glows -->
+  <div class="glow-hero" style="top:-200px;left:-200px;"></div>
+  <div class="glow-hero" style="bottom:-300px;right:-200px;opacity:0.6;"></div>
+
+  <div class="max-w-6xl w-full relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- LEFT -->
+      <div>
+        <div class="anim fu mb-6">
+          <span class="badge">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;animation:pulse-dot 2s ease infinite;"></span>
+            Auditoría para coaches
+          </span>
+        </div>
+
+        <h1 class="serif anim fu d1 mb-6" style="font-size:clamp(2.6rem,5vw,4rem);line-height:1.1;letter-spacing:-0.02em;">
+          Tu negocio creció.<br>
+          <span class="grad">Tu sistema no.</span>
+        </h1>
+
+        <p class="anim fu d2 mb-8" style="font-size:1.15rem;color:#94A8C4;max-width:480px;line-height:1.7;">
+          Auditoría de sistema para coaches que ya tienen clientes y resultados,
+          pero sienten que su operación no puede crecer sin que todo dependa de ellos.
+        </p>
+
+        <div class="anim fu d3 flex flex-wrap items-center gap-4 mb-8">
+          <a href="#reservar" class="btn-main">
+            Reservar auditoría
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#lead-magnet" class="btn-ghost">
+            Diagnóstico gratuito
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </a>
+        </div>
+
+        <div class="anim fi d4 flex items-center gap-6" style="font-size:0.82rem;color:var(--text-muted);">
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" fill="none" stroke="#68D391" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Diagnóstico en 10 días
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" fill="none" stroke="#68D391" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Precio único, sin sorpresas
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" fill="none" stroke="#68D391" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Reunión 1:1 incluida
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: TERMINAL -->
+      <div class="anim si d4">
+        <div class="terminal rounded-2xl overflow-hidden relative">
+          <div style="background:rgba(8,12,20,0.9);padding:12px 16px;border-bottom:1px solid rgba(99,179,237,0.08);display:flex;align-items:center;gap:8px;">
+            <div class="dot" style="background:#FF5F57;"></div>
+            <div class="dot" style="background:#FEBC2E;"></div>
+            <div class="dot" style="background:#28C840;"></div>
+            <span class="mono" style="font-size:0.7rem;color:var(--text-dim);margin-left:8px;">system_audit.run</span>
+          </div>
+          <div style="padding:24px;font-size:0.78rem;line-height:1.9;">
+
+            <div style="margin-bottom:4px;color:var(--text-dim);"># Analizando operación de coach...</div>
+
+            <div style="margin-bottom:16px;">
+              <span class="kw">const</span> <span style="color:var(--text);">coach</span> <span style="color:var(--text-dim);">=</span> {
+              <div style="padding-left:20px;">
+                <div><span class="prop">clientes</span>: <span class="num">18</span>,</div>
+                <div><span class="prop">sistema</span>: <span class="str">"WhatsApp + planillas"</span>,</div>
+                <div><span class="prop">carga_semanal</span>: <span class="str">"a ojo"</span>,</div>
+                <div><span class="prop">deteccion_riesgo</span>: <span class="err">"cuando el atleta avisa"</span></div>
+              </div>
+              }
+            </div>
+
+            <div style="color:var(--text-dim);margin-bottom:8px;"># Problemas detectados</div>
+            <div style="padding-left:12px;border-left:2px solid rgba(252,129,129,0.3);margin-bottom:16px;">
+              <div><span class="err">✕</span> <span class="prop">estancamiento_detectado:</span> <span class="warn">semana 4</span> <span class="cmt">// ya tarde</span></div>
+              <div><span class="err">✕</span> <span class="prop">decisiones_carga:</span> <span class="str">"sin datos"</span></div>
+              <div><span class="err">✕</span> <span class="prop">dependencia:</span> <span class="num">100</span><span class="num">%</span> <span class="cmt">// sos el sistema</span></div>
+            </div>
+
+            <div style="color:var(--text-dim);margin-bottom:8px;"># Quick wins identificados</div>
+            <div style="padding-left:12px;border-left:2px solid rgba(99,179,237,0.3);margin-bottom:16px;">
+              <div><span class="ok">✓</span> <span class="prop">wellbeing_check:</span> <span class="str">"antes de sesión"</span></div>
+              <div><span class="ok">✓</span> <span class="prop">alerta_riesgo:</span> <span class="str">"automática"</span></div>
+              <div><span class="ok">✓</span> <span class="prop">decision_carga:</span> <span class="str">"basada en datos"</span></div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse-dot 1.5s ease infinite;"></div>
+              <span style="color:var(--text-muted);">Auditoría completa. <span class="ok">Sistema listo para escalar.</span></span>
+            </div>
+
+          </div>
+          <!-- scan line -->
+          <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
+            <div style="width:100%;height:40px;background:linear-gradient(to bottom,transparent,rgba(99,179,237,0.025),transparent);animation:scanLine 4s ease-in-out infinite;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  PARA QUIÉN ES (sección nueva)
+──────────────────────────────────────────── -->
+<section class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="reveal text-center mb-16">
+      <p class="badge mb-4" style="margin:0 auto 16px;">Para quién es</p>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.02em;">
+        Esto es para vos si...
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+
+      <div class="reveal delay-1 glass rounded-2xl p-7" style="border-top:2px solid rgba(99,179,237,0.25);">
+        <div style="font-size:1.8rem;margin-bottom:16px;">📈</div>
+        <h3 class="mb-3" style="font-size:1.05rem;font-weight:600;">Ya tenés clientes y resultados</h3>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.7;">
+          10 a 30 clientes activos, cobrás por tus servicios, generás resultados. El problema no es técnico. Es operativo.
+        </p>
+      </div>
+
+      <div class="reveal delay-2 glass rounded-2xl p-7" style="border-top:2px solid rgba(79,209,197,0.25);">
+        <div style="font-size:1.8rem;margin-bottom:16px;">⏱️</div>
+        <h3 class="mb-3" style="font-size:1.05rem;font-weight:600;">Sentís que llegaste al límite</h3>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.7;">
+          Podrías tomar más clientes, pero no querés perder calidad. Todo depende de que vos estés presente.
+        </p>
+      </div>
+
+      <div class="reveal delay-3 glass rounded-2xl p-7" style="border-top:2px solid rgba(104,211,145,0.25);">
+        <div style="font-size:1.8rem;margin-bottom:16px;">🎯</div>
+        <h3 class="mb-3" style="font-size:1.05rem;font-weight:600;">Querés decisiones más claras</h3>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.7;">
+          Cuándo subir carga, cuándo intervenir, cuándo un atleta está en riesgo. Hoy lo resolvés con intuición.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="reveal delay-4 glass rounded-2xl p-6 mt-4" style="border-left:3px solid rgba(99,179,237,0.3);display:flex;align-items:center;gap:16px;">
+      <span style="font-size:1.5rem;">🚫</span>
+      <p style="font-size:0.92rem;color:var(--text-muted);">
+        <strong style="color:var(--text);">Esto no es para vos</strong> si recién arrancás, si todavía no tenés clientes pagos, o si buscás un programa de entrenamiento. La auditoría asume que ya tenés experiencia y resultados.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  PROBLEMAS (más específicos)
+──────────────────────────────────────────── -->
+<section class="py-24 px-6 radial-section">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="reveal text-center mb-16">
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.02em;">
+        ¿Te suena esto?
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-3">
+
+      <div class="reveal delay-1 prob-card glass rounded-xl px-6 py-5">
+        <p style="font-size:0.95rem;color:var(--text);">Tu atleta lleva tres semanas estancado y te enterás cuando <span style="color:var(--blue);">él te lo dice</span>, no cuando vos lo detectás.</p>
+      </div>
+
+      <div class="reveal delay-2 prob-card glass rounded-xl px-6 py-5">
+        <p style="font-size:0.95rem;color:var(--text);">Antes de cada sesión no tenés ningún dato sobre cómo llegó el atleta: <span style="color:var(--blue);">decidís en el momento</span>, con lo que te cuenta.</p>
+      </div>
+
+      <div class="reveal delay-3 prob-card glass rounded-xl px-6 py-5">
+        <p style="font-size:0.95rem;color:var(--text);">No podés irte de vacaciones tranquilo porque si <span style="color:var(--blue);">vos no estás, el sistema no funciona</span>.</p>
+      </div>
+
+      <div class="reveal delay-4 prob-card glass rounded-xl px-6 py-5">
+        <p style="font-size:0.95rem;color:var(--text);">Subís la carga porque "venía progresando bien", sin saber si el contexto del atleta <span style="color:var(--blue);">cambió esta semana</span>.</p>
+      </div>
+
+      <div class="reveal delay-5 prob-card glass rounded-xl px-6 py-5">
+        <p style="font-size:0.95rem;color:var(--text);">Gestionás 18 clientes pero seguís usando WhatsApp y una planilla que <span style="color:var(--blue);">no escala más</span>.</p>
+      </div>
+
+      <div class="reveal prob-card glass rounded-xl px-6 py-5" style="transition-delay:0.55s;">
+        <p style="font-size:0.95rem;color:var(--text);">Sabés que podrías atender el doble de clientes, pero agregarlos <span style="color:var(--blue);">te daría el doble de trabajo</span> a vos.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  DIFERENCIAL (expandido — el corazón de la propuesta)
+──────────────────────────────────────────── -->
+<section class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <div>
+        <div class="reveal mb-3">
+          <span class="badge">El diferencial</span>
+        </div>
+        <h2 class="reveal serif mb-6" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.02em;line-height:1.2;">
+          No es consultoría fitness.<br>
+          <span class="grad">Es ingeniería de sistemas.</span>
+        </h2>
+        <div class="reveal delay-1" style="color:#94A8C4;line-height:1.8;font-size:0.97rem;">
+          <p style="margin-bottom:16px;">
+            Vengo del testing de software. Aprendí a mapear flujos, identificar edge cases y validar que un sistema funciona bajo carga antes de que falle.
+          </p>
+          <p style="margin-bottom:16px;">
+            Cuando apliqué esa mentalidad al entrenamiento, vi algo que nadie nombraba: la mayoría de los sistemas de coaches tienen los mismos bugs que el software mal testeado. Decisiones que dependen de memoria. Feedback que llega tarde. Métricas que se miran pero no se usan.
+          </p>
+          <p>
+            La auditoría no te enseña a entrenar. Encuentra dónde tu sistema pierde eficiencia aunque vos hagas todo bien.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal delay-2">
+        <div class="grid gap-3">
+
+          <div class="glass-active rounded-xl p-5 flex items-start gap-4">
+            <div style="width:36px;height:36px;border-radius:8px;background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" fill="none" stroke="var(--blue)" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div>
+              <p style="font-weight:600;font-size:0.92rem;margin-bottom:4px;">Mentalidad de QA aplicada al deporte</p>
+              <p style="font-size:0.85rem;color:var(--text-muted);">Busco lo que falla antes de que falle. No después de la lesión, del estancamiento o del abandono.</p>
+            </div>
+          </div>
+
+          <div class="glass-active rounded-xl p-5 flex items-start gap-4">
+            <div style="width:36px;height:36px;border-radius:8px;background:rgba(79,209,197,0.1);border:1px solid rgba(79,209,197,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+            </div>
+            <div>
+              <p style="font-weight:600;font-size:0.92rem;margin-bottom:4px;">Lean Training System</p>
+              <p style="font-size:0.85rem;color:var(--text-muted);">Un marco propio para eliminar junk volume, gestionar fatiga como inventario y tomar decisiones basadas en datos reales.</p>
+            </div>
+          </div>
+
+          <div class="glass-active rounded-xl p-5 flex items-start gap-4">
+            <div style="width:36px;height:36px;border-radius:8px;background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" fill="none" stroke="var(--green)" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+              <p style="font-weight:600;font-size:0.92rem;margin-bottom:4px;">SaaS propio en producción</p>
+              <p style="font-size:0.85rem;color:var(--text-muted);">No hablo de dashboards de forma abstracta. Construí uno funcional con wellbeing, riesgo, progreso y semáforo de carga.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  QUÉ INCLUYE
+──────────────────────────────────────────── -->
+<section class="py-24 px-6 radial-section">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="reveal text-center mb-4">
+      <span class="badge">Entregables concretos</span>
+    </div>
+    <h2 class="reveal serif text-center mb-16" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.02em;">
+      Qué recibís en 10 días
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-4">
+
+      <div class="reveal delay-1 glass rounded-2xl p-7 flex gap-5">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--blue);font-weight:500;">01</div>
+        <div>
+          <h3 style="font-weight:600;margin-bottom:6px;font-size:0.97rem;">Entrevista diagnóstica (60 min)</h3>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;">Mapeamos cómo trabajás hoy: herramientas, flujos, cómo tomás decisiones y dónde sentís que perdés tiempo.</p>
+        </div>
+      </div>
+
+      <div class="reveal delay-2 glass rounded-2xl p-7 flex gap-5">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--blue);font-weight:500;">02</div>
+        <div>
+          <h3 style="font-weight:600;margin-bottom:6px;font-size:0.97rem;">Mapa del sistema actual</h3>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;">Documento con tu flujo real: puntos de fricción, tareas repetidas, decisiones sin base y huecos de información.</p>
+        </div>
+      </div>
+
+      <div class="reveal delay-3 glass rounded-2xl p-7 flex gap-5">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--blue);font-weight:500;">03</div>
+        <div>
+          <h3 style="font-weight:600;margin-bottom:6px;font-size:0.97rem;">Auditoría de desperdicio</h3>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;">Dónde hay sobrecarga sin valor, información tardía, decisiones sin datos y dependencia total en tu disponibilidad.</p>
+        </div>
+      </div>
+
+      <div class="reveal delay-4 glass rounded-2xl p-7 flex gap-5">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--blue);font-weight:500;">04</div>
+        <div>
+          <h3 style="font-weight:600;margin-bottom:6px;font-size:0.97rem;">3 problemas + 3 quick wins</h3>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;">No 20 recomendaciones. Solo lo que importa primero: los cuellos de botella reales y lo que podés implementar esta semana.</p>
+        </div>
+      </div>
+
+      <div class="reveal delay-5 glass rounded-2xl p-7 flex gap-5">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--blue);font-weight:500;">05</div>
+        <div>
+          <h3 style="font-weight:600;margin-bottom:6px;font-size:0.97rem;">Sesión de cierre + hoja de ruta</h3>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;">Reunión final donde te explico qué encontré, qué cambiar primero y qué no tocar. Te vas con un camino claro.</p>
+        </div>
+      </div>
+
+      <div class="reveal glass rounded-2xl p-7 flex gap-5" style="transition-delay:0.55s;border-color:rgba(99,179,237,0.15);">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--blue);font-weight:500;">06</div>
+        <div>
+          <h3 style="font-weight:600;margin-bottom:6px;font-size:0.97rem;">Acceso demo al sistema (14 días)</h3>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;">Podés ver en la práctica cómo se vería tu operación con wellbeing, riesgo y progreso centralizado.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  CÓMO FUNCIONA (pasos más específicos)
+──────────────────────────────────────────── -->
+<section class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="reveal text-center mb-16">
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.02em;">
+        Cómo funciona
+      </h2>
+    </div>
+
+    <div class="steps-grid grid md:grid-cols-4 gap-6 relative">
+      <div class="step-line"></div>
+
+      <div class="reveal delay-1 text-center">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:600;" class="grad">01</div>
+        <h4 style="font-size:0.92rem;font-weight:600;margin-bottom:6px;">Reservás</h4>
+        <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Completás un formulario corto con contexto de tu operación actual.</p>
+      </div>
+
+      <div class="reveal delay-2 text-center">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:600;" class="grad">02</div>
+        <h4 style="font-size:0.92rem;font-weight:600;margin-bottom:6px;">Diagnosticamos</h4>
+        <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Entrevista de 60 min + análisis de tu flujo real en los siguientes 7 días.</p>
+      </div>
+
+      <div class="reveal delay-3 text-center">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:600;" class="grad">03</div>
+        <h4 style="font-size:0.92rem;font-weight:600;margin-bottom:6px;">Recibís el mapa</h4>
+        <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Documento de auditoría + sesión de cierre con prioridades claras.</p>
+      </div>
+
+      <div class="reveal delay-4 text-center">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:600;" class="grad">04</div>
+        <h4 style="font-size:0.92rem;font-weight:600;margin-bottom:6px;">Implementás</h4>
+        <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Con el roadmap priorizado, sabés exactamente qué cambiar primero y por qué.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  LEAD MAGNET (nuevo)
+──────────────────────────────────────────── -->
+<section class="py-24 px-6 radial-bottom" id="lead-magnet">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="reveal magnet-box p-10 md:p-14 text-center">
+      <div class="badge" style="margin:0 auto 20px;width:fit-content;">Gratuito</div>
+      <h2 class="reveal serif mb-4" style="font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-0.02em;">
+        Antes de reservar,<br>hacé el diagnóstico
+      </h2>
+      <p class="reveal delay-1 mb-8" style="color:var(--text-muted);font-size:0.97rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7;">
+        10 preguntas que te muestran si tu sistema de entrenamiento está
+        tomando decisiones — o solo registrando datos. Descargalo gratis,
+        tardás 5 minutos.
+      </p>
+      <div class="reveal delay-2 flex flex-wrap justify-center gap-4 mb-6">
+        <input type="email" placeholder="tu@email.com" style="padding:14px 20px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:0.9rem;outline:none;min-width:260px;transition:border 0.2s;" onfocus="this.style.borderColor='rgba(99,179,237,0.4)'" onblur="this.style.borderColor='var(--border)'">
+        <a href="#" class="btn-main" style="font-size:0.95rem;padding:14px 28px;">
+          Descargar diagnóstico
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+      <p class="reveal delay-3" style="font-size:0.78rem;color:var(--text-dim);">Sin spam. Solo el PDF.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  PRECIO (una sola oferta, clara)
+──────────────────────────────────────────── -->
+<section class="py-24 px-6" id="reservar">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="reveal text-center mb-16">
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.02em;">
+        Una auditoría. Un precio.
+      </h2>
+      <p style="color:var(--text-muted);margin-top:12px;font-size:0.95rem;">Sin tiers, sin "a convenir", sin sorpresas al final.</p>
+    </div>
+
+    <div class="reveal delay-1 glass-active rounded-2xl overflow-hidden" style="max-width:620px;margin:0 auto;">
+
+      <!-- price header -->
+      <div style="padding:40px;border-bottom:1px solid var(--border);text-align:center;">
+        <p class="mono" style="font-size:0.78rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Auditoría Lean de Sistema de Entrenamiento</p>
+        <div class="price-tag" style="justify-content:center;align-items:baseline;gap:6px;margin-bottom:8px;">
+          <span style="font-size:1rem;color:var(--text-muted);">USD</span>
+          <span class="serif grad" style="font-size:4.5rem;line-height:1;letter-spacing:-0.03em;">300</span>
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Pago único. Sin cuotas ni suscripción.</p>
+      </div>
+
+      <!-- items -->
+      <div style="padding:32px 40px;">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:32px;">
+          <li style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+            <svg width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Entrevista diagnóstica de 60 minutos
+          </li>
+          <li style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+            <svg width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Mapa del sistema actual con puntos de fricción
+          </li>
+          <li style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+            <svg width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Documento de auditoría: 3 problemas críticos + 3 quick wins
+          </li>
+          <li style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+            <svg width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Hoja de ruta priorizada para implementar
+          </li>
+          <li style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+            <svg width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Sesión de cierre 1:1 con recomendaciones finales
+          </li>
+          <li style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+            <svg width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Acceso demo al sistema (14 días)
+          </li>
+        </ul>
+
+        <a href="#" class="btn-main" style="width:100%;justify-content:center;font-size:1rem;padding:17px;">
+          Reservar mi auditoría — USD 300
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+
+        <p style="text-align:center;font-size:0.78rem;color:var(--text-dim);margin-top:16px;">
+          Te confirmo disponibilidad dentro de las 24 hs.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ────────────────────────────────────────────
+  CTA FINAL (alineado con el precio)
+──────────────────────────────────────────── -->
+<section class="py-28 px-6 text-center radial-section">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="reveal relative" style="display:inline-block;margin-bottom:16px;">
+      <span class="quote-mark">"</span>
+      <p class="serif" style="font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-0.02em;line-height:1.3;padding-top:40px;">
+        Tu criterio como coach no se reemplaza.<br>
+        <span class="grad">Se potencia con datos.</span>
+      </p>
+    </div>
+
+    <p class="reveal delay-1" style="color:var(--text-muted);font-size:0.97rem;margin:24px 0 36px;max-width:460px;margin-left:auto;margin-right:auto;">
+      Si ya tenés clientes y resultados, la auditoría te da el siguiente paso claro. Sin humo, sin genéricos.
+    </p>
+
+    <div class="reveal delay-2 flex flex-wrap justify-center gap-4">
+      <a href="#reservar" class="btn-main">
+        Reservar auditoría — USD 300
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#lead-magnet" class="btn-ghost">
+        Primero quiero el diagnóstico gratis
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────
+  FOOTER
+──────────────────────────────────────────── -->
+<footer style="padding:32px 24px;text-align:center;border-top:1px solid var(--border);">
+  <p class="mono" style="font-size:0.75rem;color:var(--text-dim);">
+    Training System Audit · Lean Training System · <span style="color:var(--text-muted);">Arquitectura de sistemas de rendimiento</span>
+  </p>
+</footer>
+
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => revealObs.observe(el));
+
+  // Hero anim trigger
+  document.querySelectorAll('.anim').forEach(el => {
+    el.style.opacity = '';
+  });
+</script>
+
+</body>
+</html>
