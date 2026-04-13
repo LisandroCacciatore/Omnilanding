@@ -108,6 +108,9 @@
     #mobile-menu.open {
       transform: translateX(0);
     }
+    
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 
@@ -126,7 +129,8 @@
         <a href="#casos" class="hover:text-white transition-colors">Casos</a>
         <a href="#auditoria" class="hover:text-white transition-colors">Auditoría</a>
         <a href="#pricing" class="hover:text-white transition-colors">SaaS</a>
-        <a href="login.html" class="text-blue-400 hover:text-blue-300 font-bold transition-all underline decoration-blue-500/30 underline-offset-4">Acceso App</a>
+        <!-- Link a la App externa -->
+        <a href="https://omnicomrade.vercel.app/login.html" class="text-blue-400 hover:text-blue-300 font-bold transition-all underline decoration-blue-500/30 underline-offset-4">Acceso App</a>
       </div>
 
       <div class="flex items-center gap-3">
@@ -136,7 +140,7 @@
           Ver Demo →
         </a>
         <!-- Mobile Toggle -->
-        <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10">
+        <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10" aria-label="Abrir menú">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -166,7 +170,7 @@
             <span class="text-xs mono text-blue-500/50">04</span> Planes SaaS
           </a>
           <div class="h-px bg-white/5 my-2"></div>
-          <a href="login.html" class="text-blue-400 font-bold">Acceso a la App</a>
+          <a href="https://omnicomrade.vercel.app/login.html" class="text-blue-400 font-bold">Acceso a la App</a>
       </div>
   </div>
 
@@ -189,7 +193,8 @@
           <a href="#auditoria" class="btn-primary w-full sm:w-auto px-8 py-5 md:py-4 rounded-xl font-bold text-white text-center text-lg md:text-base">
             Solicitar Auditoría Diagnóstica
           </a>
-          <a href="login.html" class="w-full sm:w-auto px-8 py-5 md:py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-center hover:bg-white/10 transition-all text-lg md:text-base">
+          <!-- Link a la App externa -->
+          <a href="https://omnicomrade.vercel.app/login.html" class="w-full sm:w-auto px-8 py-5 md:py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-center hover:bg-white/10 transition-all text-lg md:text-base">
             Ingresar a la App
           </a>
         </div>
@@ -238,12 +243,12 @@
             </p>
           </div>
         </div>
-        <div class="absolute -top-10 -right-10 w-64 h-64 bg-cyan-500/20 blur-3xl rounded-full"></div>
+        <div class="absolute -top-10 -right-10 w-64 h-64 bg-cyan-500/10 blur-3xl rounded-full"></div>
       </div>
     </div>
   </section>
 
-  <!-- LIVE APP LINK -->
+  <!-- LIVE APP LINK SECTION -->
   <section class="py-12 px-6">
     <div class="max-w-7xl mx-auto">
         <div class="glass p-1 border-blue-500/30 rounded-[32px] overflow-hidden group">
@@ -251,9 +256,10 @@
                 <div class="max-w-xl">
                     <span class="mono text-cyan-400 text-[10px] font-bold tracking-widest uppercase mb-4 block text-center md:text-left">Entorno de Producción</span>
                     <h2 class="serif text-3xl md:text-4xl mb-4 text-center md:text-left">¿Ya sos parte de la Beta?</h2>
-                    <p class="text-slate-400 text-center md:text-left text-sm md:text-base leading-relaxed">Accedé a tu panel de control para gestionar alumnos, rutinas y visualizar métricas en tiempo real.</p>
+                    <p class="text-slate-400 text-center md:text-left text-sm md:text-base leading-relaxed">Accedé a tu panel de control para gestionar alumnos, rutinas y visualizar métricas en tiempo real directamente en Vercel.</p>
                 </div>
-                <a href="login.html" class="group-hover:scale-105 transition-transform duration-500 flex flex-col items-center gap-4 bg-blue-500/10 border border-blue-500/20 p-8 rounded-2xl w-full md:w-64 text-center">
+                <!-- Link a la App externa -->
+                <a href="https://omnicomrade.vercel.app/login.html" class="group-hover:scale-105 transition-transform duration-500 flex flex-col items-center gap-4 bg-blue-500/10 border border-blue-500/20 p-8 rounded-2xl w-full md:w-64 text-center">
                     <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
                     </div>
@@ -268,7 +274,7 @@
   <section id="solucion" class="py-24 px-6 bg-white/[0.02]">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-20 reveal">
-        <h2 class="serif text-4xl md:text-5xl mb-4 italic italic">¿Tu gimnasio opera o adivina?</h2>
+        <h2 class="serif text-4xl md:text-5xl mb-4 italic">¿Tu gimnasio opera o adivina?</h2>
         <p class="text-slate-400 max-w-2xl mx-auto">Excel, WhatsApp y el papel son los enemigos de la escala. Cuando no medís, no podés mejorar el rendimiento de tus alumnos.</p>
       </div>
       <div class="grid md:grid-cols-3 gap-8">
@@ -385,6 +391,7 @@
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div class="relative reveal">
         <div class="aspect-[4/5] rounded-3xl overflow-hidden glass p-2 border border-white/5 shadow-2xl relative bg-black">
+          <!-- Uso de tu imagen real img/lis.png -->
           <img src="img/lis.png" alt="Lisandro Cacciatore — Builder & Coach" width="800" height="1000" class="w-full h-full object-cover object-top rounded-[20px] opacity-90 grayscale hover:grayscale-0 transition-all duration-700">
           <div class="absolute inset-0 bg-gradient-to-t from-[#030508] via-transparent to-transparent"></div>
         </div>
@@ -563,12 +570,12 @@
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div>
         <span class="mono text-blue-400 font-bold tracking-tighter uppercase">LC // TechFitness</span>
-        <p class="text-[10px] text-slate-600 mt-2 uppercase tracking-widest font-black italic">Operando en Real-time con Supabase</p>
+        <p class="text-[10px] text-slate-600 mt-2 uppercase tracking-widest font-black italic italic">Operando en Real-time con Supabase</p>
       </div>
       <div class="flex gap-8 text-xs font-bold text-slate-500 uppercase tracking-widest">
         <a href="https://www.linkedin.com/in/lisandro-cacciatore/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
         <a href="https://github.com/LisandroCacciatore" target="_blank" class="hover:text-white transition-colors">GitHub</a>
-        <a href="login.html" class="hover:text-white transition-colors">Acceso App</a>
+        <a href="https://omnicomrade.vercel.app/login.html" class="hover:text-white transition-colors">Acceso App</a>
       </div>
       <p class="text-[10px] text-slate-700 font-medium">© 2026 Lisandro Cacciatore. All Rights Reserved.</p>
     </div>
