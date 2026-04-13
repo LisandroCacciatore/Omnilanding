@@ -4,46 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lisandro Cacciatore · TechFitness — Sistema operativo para gimnasios</title>
+  <title>Lisandro Cacciatore | TechFitness — El Sistema Operativo de Rendimiento</title>
   <meta name="description"
-    content="Diseño y desarrollo plataformas de rendimiento deportivo. TechFitness reemplaza WhatsApp + planillas por toma de decisiones basada en datos reales de entrenamiento.">
+    content="Dejá de adivinar. TechFitness es la plataforma SaaS que transforma la gestión de tu gimnasio en decisiones basadas en datos reales de entrenamiento.">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="TechFitness — El Sistema Operativo de Rendimiento">
+  <meta property="og:description" content="Profesionalizá tu gimnasio: de la intuición a los datos reales.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lcacciatore.com/techfitness">
+  <meta property="og:image" content="https://techfitness.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
     rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏋️</text></svg>">
-  <meta property="og:title" content="TechFitness — Sistema operativo para gimnasios">
-  <meta property="og:description" content="Plataforma de rendimiento deportivo. Reemplaza WhatsApp + planillas por decisiones basadas en datos.">
-  <meta property="og:image" content="https://techfitness.app/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  
   <style>
     :root {
-      --bg: #07090D;
-      --bg-card: rgba(12, 18, 30, 0.7);
-      --border: rgba(255, 255, 255, 0.06);
-      --border-active: rgba(99, 179, 237, 0.22);
-      --text: #EEF2F7;
-      --text-muted: #6B7A99;
-      --text-dim: #3D4A60;
-      --blue: #63B3ED;
-      --cyan: #4FD1C5;
-      --green: #68D391;
-      --yellow: #F6E05E;
-      --red: #FC8181;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 70px;
+      --bg: #030508;
+      --bg-card: rgba(10, 15, 25, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(99, 179, 237, 0.3);
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --blue: #60A5FA;
+      --cyan: #2DD4BF;
+      --green: #4ADE80;
     }
 
     body {
@@ -51,923 +42,376 @@
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
-      line-height: 1.65;
+      scroll-behavior: smooth;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: .35;
-    }
+    .serif { font-family: 'DM Serif Display', serif; }
+    .mono { font-family: 'DM Mono', monospace; }
 
-    .serif {
-      font-family: 'DM Serif Display', serif;
-    }
-
-    .mono {
-      font-family: 'DM Mono', monospace;
-    }
-
-    .grad {
-      background: linear-gradient(130deg, #63B3ED 0%, #4FD1C5 100%);
+    .grad-text {
+      background: linear-gradient(135deg, #60A5FA 0%, #2DD4BF 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
-    /* NAVBAR */
-    #navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 20px 24px;
-      border-bottom: 1px solid transparent;
-      transition: all .35s ease;
-    }
-
-    #navbar.scrolled {
-      background: rgba(7, 9, 13, .92);
-      backdrop-filter: blur(20px);
-      border-bottom-color: var(--border);
-      padding: 13px 24px;
-    }
-
-    .nav-inner {
-      max-width: 1160px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: 'DM Mono', monospace;
-      font-size: .82rem;
-      color: var(--blue);
-      letter-spacing: .08em;
-    }
-
-    .nav-links {
-      display: none;
-      gap: 28px;
-      align-items: center;
-    }
-
-    @media(min-width:768px) {
-      .nav-links {
-        display: flex;
-      }
-    }
-
-    .nav-links a {
-      font-size: .82rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-cta {
-      font-size: .82rem;
-      font-weight: 600;
-      padding: 9px 18px;
-      background: transparent;
-      border: 1px solid var(--border-active);
-      border-radius: 8px;
-      color: var(--blue);
-      text-decoration: none;
-      transition: all .2s;
-      white-space: nowrap;
-    }
-
-    .nav-cta:hover {
-      background: rgba(99, 179, 237, .08);
-    }
-
-    /* GLASS */
     .glass {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
     }
 
-    .glass-active {
-      background: var(--bg-card);
-      border: 1px solid var(--border-active);
-      backdrop-filter: blur(16px);
-    }
-
-    /* TERMINAL */
-    .terminal {
-      font-family: 'DM Mono', monospace;
-      background: rgba(4, 7, 13, .97);
-      border: 1px solid rgba(99, 179, 237, .1);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, .5), 0 32px 64px -16px rgba(0, 0, 0, .7), 0 0 80px rgba(99, 179, 237, .05);
-    }
-
-    .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-    }
-
-    /* BUTTONS */
-    .btn-main {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(130deg, #63B3ED, #4FD1C5);
-      color: #07090D;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 16px 34px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all .25s cubic-bezier(.4, 0, .2, 1);
-      position: relative;
-      overflow: hidden;
-      letter-spacing: -.01em;
-    }
-
-    .btn-main::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, .15);
-      opacity: 0;
-      transition: opacity .2s;
-    }
-
-    .btn-main:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(99, 179, 237, .35);
-    }
-
-    .btn-main:hover::after {
-      opacity: 1;
-    }
-
-    .btn-main:active {
-      transform: translateY(0) scale(.98);
-    }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: .9rem;
-      padding: 14px 26px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      text-decoration: none;
-      transition: all .25s;
-      letter-spacing: -.01em;
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--border-active);
-      color: var(--text);
-      transform: translateY(-2px);
-    }
-
-    /* DIVIDER */
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .06), transparent);
-    }
-
-    /* BADGE */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--blue);
-      border: 1px solid rgba(99, 179, 237, .2);
-      padding: 5px 12px;
-      border-radius: 100px;
-      background: rgba(99, 179, 237, .05);
-    }
-
-    /* BG RADIAL */
-    .radial-top {
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99, 179, 237, .05) 0%, transparent 70%);
-    }
-
-    .radial-bottom {
-      background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(79, 209, 197, .04) 0%, transparent 70%);
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(22px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0
-      }
-
-      to {
-        opacity: 1
-      }
-    }
-
-    @keyframes scaleIn {
-      from {
-        opacity: 0;
-        transform: scale(.96)
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1)
-      }
-    }
-
-    @keyframes pulseDot {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1)
-      }
-
-      50% {
-        opacity: .5;
-        transform: scale(.82)
-      }
-    }
-
-    @keyframes fadeUpIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    @keyframes scan {
-      0% {
-        transform: translateY(-100%);
-        opacity: 0
-      }
-
-      25% {
-        opacity: .35
-      }
-
-      75% {
-        opacity: .35
-      }
-
-      100% {
-        transform: translateY(600%);
-        opacity: 0
-      }
-    }
-
-    .anim {
-      opacity: 0;
-      animation-fill-mode: both;
-    }
-
-    .fu {
-      animation: fadeUp .65s ease-out forwards;
-    }
-
-    .fi {
-      animation: fadeIn .65s ease-out forwards;
-    }
-
-    .si {
-      animation: scaleIn .55s ease-out forwards;
-    }
-
-    .d1 {
-      animation-delay: 80ms;
-    }
-
-    .d2 {
-      animation-delay: 160ms;
-    }
-
-    .d3 {
-      animation-delay: 240ms;
-    }
-
-    .d4 {
-      animation-delay: 320ms;
-    }
-
-    .d5 {
-      animation-delay: 400ms;
-    }
-
-    /* SCROLL REVEAL */
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .6s ease, transform .6s ease;
+      transform: translateY(20px);
+      transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
     }
-
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .reveal.d1 {
-      transition-delay: .1s;
+    .btn-primary {
+      background: linear-gradient(135deg, #3B82F6, #14B8A6);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
     }
 
-    .reveal.d2 {
-      transition-delay: .2s;
-    }
-
-    .reveal.d3 {
-      transition-delay: .3s;
-    }
-
-    .reveal.d4 {
-      transition-delay: .4s;
-    }
-
-    .reveal.d5 {
-      transition-delay: .5s;
-    }
-
-    /* PROB CARD */
-    .prob-card {
-      transition: all .3s cubic-bezier(.4, 0, .2, 1);
-      border-left: 2px solid transparent;
-    }
-
-    .prob-card:hover {
-      border-left-color: var(--blue);
-      transform: translateX(4px);
-      background: rgba(99, 179, 237, .04);
-    }
-
-    /* FAQ */
-    .faq-item {
+    .nav-scrolled {
+      background: rgba(3, 5, 8, 0.9);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
 
-    .faq-trigger {
-      width: 100%;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: .96rem;
-      font-weight: 600;
-      padding: 20px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      text-align: left;
-      gap: 16px;
-      transition: color .2s;
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
+    .float { animation: floating 4s ease-in-out infinite; }
 
-    .faq-trigger:hover {
-      color: var(--blue);
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] summary .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform 0.3s ease; display: inline-block; }
+
+    .case-card:hover .case-img { transform: scale(1.05); }
+    .case-img { transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1); }
+
+    /* Mobile Menu Sidebar */
+    #mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    .faq-icon {
-      flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1px solid var(--border-active);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--blue);
-      font-size: .95rem;
-      transition: transform .3s ease;
-    }
-
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-    }
-
-    .faq-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    .faq-item.open .faq-body {
-      max-height: 380px;
-    }
-
-    .faq-body p {
-      font-size: .89rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      padding-bottom: 20px;
-    }
-
-    /* STICKY */
-    #sticky-cta {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 90;
-      padding: 12px 16px;
-      background: rgba(7, 9, 13, .96);
-      border-top: 1px solid var(--border);
-      backdrop-filter: blur(20px);
-      transform: translateY(100%);
-      transition: transform .4s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    #sticky-cta.visible {
-      transform: translateY(0);
-    }
-
-    @media(min-width:768px) {
-      #sticky-cta {
-        display: none;
-      }
-    }
-
-    /* SYNTAX */
-    .kw {
-      color: #F687B3;
-    }
-
-    .str {
-      color: #68D391;
-    }
-
-    .num {
-      color: #F6E05E;
-    }
-
-    .prop {
-      color: #63B3ED;
-    }
-
-    .cmt {
-      color: #3D4A60;
-    }
-
-    .err {
-      color: #FC8181;
-    }
-
-    .ok {
-      color: #68D391;
-    }
-
-    .warn {
-      color: #F6E05E;
-    }
-
-    /* FEATURE GRID */
-    .feature-card {
-      transition: all .3s ease;
-      border-top: 2px solid transparent;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      border-top-color: var(--blue);
-    }
-
-    /* STEP */
-    .step-num {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(99, 179, 237, .08);
-      border: 1px solid rgba(99, 179, 237, .2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Mono', monospace;
-      font-size: .8rem;
-      color: var(--blue);
-      flex-shrink: 0;
-    }
-
-    /* PRICING */
-    .plan-card {
-      border-radius: 20px;
-      padding: 36px;
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-
-    .plan-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, .4);
-    }
-
-    .plan-featured {
-      background: linear-gradient(145deg, rgba(99, 179, 237, .08) 0%, rgba(79, 209, 197, .06) 100%);
-      border: 1px solid rgba(99, 179, 237, .3);
-      position: relative;
-    }
-
-    .plan-featured::before {
-      content: 'MÁS POPULAR';
-      position: absolute;
-      top: -13px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'DM Mono', monospace;
-      font-size: .65rem;
-      letter-spacing: .14em;
-      color: #07090D;
-      background: linear-gradient(130deg, #63B3ED, #4FD1C5);
-      padding: 4px 14px;
-      border-radius: 100px;
-      white-space: nowrap;
+    #mobile-menu.open {
+      transform: translateX(0);
     }
   </style>
 </head>
 
-<body>
+<body class="antialiased">
 
   <!-- NAVBAR -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <span class="nav-logo">TF · Lisandro Cacciatore</span>
-      <div class="nav-links">
-        <a href="#producto">El producto</a>
-        <a href="#como-funciona">Cómo funciona</a>
-        <a href="#auditoria">Auditoría</a>
-        <a href="#precio">Precio</a>
-        <a href="#faq">FAQ</a>
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="mono text-blue-400 text-sm font-bold tracking-tighter uppercase">LC // TechFitness</span>
       </div>
-      <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20ver%20una%20demo%20de%20TechFitness" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"
-        class="nav-cta">Ver demo →</a>
+      
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+        <a href="#solucion" class="hover:text-white transition-colors">Solución</a>
+        <a href="#casos" class="hover:text-white transition-colors">Casos</a>
+        <a href="#auditoria" class="hover:text-white transition-colors">Auditoría</a>
+        <a href="#pricing" class="hover:text-white transition-colors">SaaS</a>
+        <a href="login.html" class="text-blue-400 hover:text-blue-300 font-bold transition-all underline decoration-blue-500/30 underline-offset-4">Acceso App</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/543415040228?text=Hola%20Lisandro%2C%20quiero%20ver%20la%20demo%20de%20TechFitness"
+           target="_blank" rel="noopener noreferrer"
+           class="text-xs md:text-sm font-semibold bg-white/5 border border-white/10 px-4 md:px-5 py-2 rounded-full hover:bg-white/10 transition-all">
+          Ver Demo →
+        </a>
+        <!-- Mobile Toggle -->
+        <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <!-- ═══════════════════════════════════
-       HERO
-  ══════════════════════════════════════ -->
-  <section class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
-    style="padding-top:100px;padding-bottom:80px;">
-    <div
-      style="position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,.065) 0%,transparent 70%);top:-220px;left:-220px;pointer-events:none;">
-    </div>
-    <div
-      style="position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(79,209,197,.04) 0%,transparent 70%);bottom:-200px;right:-150px;pointer-events:none;">
-    </div>
-
-    <div class="max-w-6xl w-full relative z-10">
-      <div class="grid lg:grid-cols-2 gap-14 items-center">
-
-        <!-- LEFT: Personal Brand -->
-        <div>
-          <div class="badge anim fu mb-6">
-            <span
-              style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;animation:pulseDot 2s ease infinite;"></span>
-            SaaS en beta · 85/85 tests pasando
-          </div>
-          <h1 class="serif anim fu d1 mb-6"
-            style="font-size:clamp(2.5rem,4.5vw,3.8rem);line-height:1.1;letter-spacing:-.02em;">
-            Construí el sistema operativo<br><span class="grad">para gimnasios</span>
-          </h1>
-          <p class="anim fu d2 mb-8" style="font-size:1.05rem;color:#94A8C4;max-width:480px;line-height:1.8;">
-            Diseño y desarrollo plataformas de rendimiento deportivo que reemplazan WhatsApp + planillas por toma de
-            decisiones basada en datos reales de entrenamiento.
-          </p>
-          <div class="anim fu d3 flex flex-wrap items-center gap-4 mb-8">
-            <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20ver%20una%20demo%20de%20TechFitness"
-              target="_blank" rel="noopener noreferrer" class="btn-main">
-              Ver demo de TechFitness
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-            <a href="#auditoria" class="btn-ghost">
-              Reservar auditoría — USD 300
-            </a>
-          </div>
-          <div class="anim fi d4 flex flex-wrap gap-5" style="font-size:.82rem;color:var(--text-muted);">
-            <div style="display:flex;align-items:center;gap:7px;">
-              <svg width="13" height="13" fill="none" stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-              Multi-tenant · 3 roles
-            </div>
-            <div style="display:flex;align-items:center;gap:7px;">
-              <svg width="13" height="13" fill="none" stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-              6 programas de entrenamiento
-            </div>
-            <div style="display:flex;align-items:center;gap:7px;">
-              <svg width="13" height="13" fill="none" stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-              Score de atleta 0–100 en tiempo real
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT: Terminal -->
-        <div class="anim si d4 mt-6 lg:mt-0">
-          <div class="terminal rounded-2xl overflow-hidden relative">
-            <div
-              style="background:rgba(5,8,14,.95);padding:11px 16px;border-bottom:1px solid rgba(99,179,237,.08);display:flex;align-items:center;gap:7px;">
-              <div class="dot" style="background:#FF5F57;"></div>
-              <div class="dot" style="background:#FEBC2E;"></div>
-              <div class="dot" style="background:#28C840;"></div>
-              <span class="mono" style="font-size:.68rem;color:var(--text-dim);margin-left:8px;">techfitness ·
-                athlete_insights · v_athlete_risk</span>
-            </div>
-            <div style="padding:22px;font-size:.76rem;line-height:1.95;">
-              <div style="color:var(--text-dim);margin-bottom:6px;"># Análisis en tiempo real — Atleta #247</div>
-              <div style="margin-bottom:16px;">
-                <span class="kw">const</span> <span style="color:var(--text);">atletaScore</span> = {
-                <div style="padding-left:18px;">
-                  <div><span class="prop">score</span>: <span class="num">62</span>, <span class="cmt">// bueno</span>
-                  </div>
-                  <div><span class="prop">bienestar_7d</span>: <span class="num">71</span>,</div>
-                  <div><span class="prop">consistencia_30d</span>: <span class="num">80</span>,</div>
-                  <div><span class="prop">progresion</span>: <span class="num">55</span>,</div>
-                  <div><span class="prop">fatiga</span>: <span class="warn">42</span> <span class="cmt">// ⚠
-                      señal</span></div>
-                </div>
-                };
-              </div>
-              <div style="color:var(--text-dim);margin-bottom:8px;"># Riesgos detectados</div>
-              <div style="padding-left:12px;border-left:2px solid rgba(246,224,94,.25);margin-bottom:16px;">
-                <div><span class="warn">⚠</span> <span class="prop">sobrecarga:</span> <span class="warn">riesgo
-                    68</span> <span class="cmt">// RPE creciente 7d</span></div>
-                <div><span class="ok">✓</span> <span class="prop">abandono:</span> <span class="str">bajo</span> <span
-                    class="cmt">// adherencia 87%</span></div>
-              </div>
-              <div style="color:var(--text-dim);margin-bottom:8px;"># Auto-progression sugerida</div>
-              <div style="padding-left:12px;border-left:2px solid rgba(99,179,237,.25);">
-                <div><span class="ok">↑</span> <span class="prop">sentadilla:</span> <span class="str">+2.5kg</span>
-                  <span class="cmt">// 10 sesiones ok</span></div>
-                <div><span class="ok">→</span> <span class="prop">press_banca:</span> <span class="str">mantener</span>
-                  <span class="cmt">// al fallo 50%</span></div>
-                <div><span class="err">↓</span> <span class="prop">peso_muerto:</span> <span class="err">-5%</span>
-                  <span class="cmt">// 2 sets fallidos</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- Mobile Menu Sidebar -->
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-[#05080F]/95 z-[60] p-8 backdrop-blur-xl border-l border-white/5 md:hidden shadow-2xl">
+      <div class="flex justify-end mb-10">
+          <button id="close-menu-btn" class="text-slate-400 hover:text-white p-2">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
       </div>
-    </div>
-  </section>
-
-  <!-- STRIP DE MÉTRICAS -->
-  <div
-    style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 24px;overflow:hidden;">
-    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:32px;">
-      <div style="display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--text-muted);">
-        <span class="mono" style="color:var(--blue);">6</span> programas de entrenamiento
+      <div class="flex flex-col gap-8 text-xl font-medium text-slate-300">
+          <a href="#solucion" class="hover:text-blue-400 transition-colors flex items-center gap-3">
+            <span class="text-xs mono text-blue-500/50">01</span> Solución
+          </a>
+          <a href="#casos" class="hover:text-blue-400 transition-colors flex items-center gap-3">
+            <span class="text-xs mono text-blue-500/50">02</span> Casos de Éxito
+          </a>
+          <a href="#auditoria" class="hover:text-blue-400 transition-colors flex items-center gap-3">
+            <span class="text-xs mono text-blue-500/50">03</span> Auditoría
+          </a>
+          <a href="#pricing" class="hover:text-blue-400 transition-colors flex items-center gap-3">
+            <span class="text-xs mono text-blue-500/50">04</span> Planes SaaS
+          </a>
+          <div class="h-px bg-white/5 my-2"></div>
+          <a href="login.html" class="text-blue-400 font-bold">Acceso a la App</a>
       </div>
-      <div style="color:var(--border);font-size:.8rem;">·</div>
-      <div style="display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--text-muted);">
-        <span class="mono" style="color:var(--cyan);">4</span> vistas SQL analíticas
-      </div>
-      <div style="color:var(--border);font-size:.8rem;">·</div>
-      <div style="display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--text-muted);">
-        <span class="mono" style="color:var(--green);">85/85</span> tests pasando
-      </div>
-      <div style="color:var(--border);font-size:.8rem;">·</div>
-      <div style="display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--text-muted);">
-        Score <span class="mono" style="color:var(--yellow);">0–100</span> por atleta
-      </div>
-      <div style="color:var(--border);font-size:.8rem;">·</div>
-      <div style="display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--text-muted);">
-        Multi-tenant <span class="mono" style="color:var(--blue);">RLS</span>
-      </div>
-    </div>
   </div>
 
-  <div class="divider"></div>
-
-  <!-- ═══════════════════════════════════
-       PROBLEMA
-  ══════════════════════════════════════ -->
-  <section class="py-24 px-6 radial-top">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal text-center mb-16">
-        <span class="badge" style="margin-bottom:14px;">El problema</span>
-        <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.02em;margin-top:12px;">¿Te suena
-          esto?</h2>
-      </div>
-      <div class="grid md:grid-cols-2 gap-3">
-        <div class="reveal d1 prob-card glass rounded-xl px-6 py-5">
-          <p style="font-size:.94rem;">Tu atleta lleva tres semanas estancado y te enterás cuando <span
-              style="color:var(--blue);">él te lo dice</span>, no cuando el sistema lo detecta.</p>
+  <!-- HERO SECTION -->
+  <section class="relative pt-32 pb-16 md:pb-20 px-6 overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center relative">
+      <div class="reveal">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold tracking-widest uppercase mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+          Performance Operating System for Gyms
         </div>
-        <div class="reveal d2 prob-card glass rounded-xl px-6 py-5">
-          <p style="font-size:.94rem;">Antes de cada sesión no sabés cómo llegó el atleta ese día: <span
-              style="color:var(--blue);">decidís en el momento</span>, con lo que te cuenta.</p>
-        </div>
-        <div class="reveal d3 prob-card glass rounded-xl px-6 py-5">
-          <p style="font-size:.94rem;">Gestionás alumnos, membresías y rutinas en tres herramientas distintas que <span
-              style="color:var(--blue);">no se hablan entre sí</span>.</p>
-        </div>
-        <div class="reveal d4 prob-card glass rounded-xl px-6 py-5">
-          <p style="font-size:.94rem;">Subís la carga porque "venía progresando bien", sin saber si el contexto del
-            atleta <span style="color:var(--blue);">cambió esta semana</span>.</p>
-        </div>
-        <div class="reveal d5 prob-card glass rounded-xl px-6 py-5">
-          <p style="font-size:.94rem;">Un alumno deja de ir y te enterás a la semana siguiente. <span
-              style="color:var(--blue);">No hubo señal previa</span>.</p>
-        </div>
-        <div class="reveal prob-card glass rounded-xl px-6 py-5 d5">
-          <p style="font-size:.94rem;">Podrías atender el doble de alumnos, pero agregarlos significa <span
-              style="color:var(--blue);">el doble de trabajo manual</span>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══════════════════════════════════
-       EL PRODUCTO
-  ══════════════════════════════════════ -->
-  <section class="py-28 px-6" id="producto">
-    <div class="max-w-6xl mx-auto">
-      <div class="reveal text-center mb-20">
-        <span class="badge" style="margin-bottom:14px;">TechFitness</span>
-        <h2 class="serif"
-          style="font-size:clamp(1.8rem,3.5vw,2.9rem);letter-spacing:-.02em;margin-top:12px;line-height:1.2;">
-          No es solo gestión.<br><span class="grad">Es un sistema operativo de rendimiento.</span>
-        </h2>
-        <p
-          style="color:var(--text-muted);font-size:.97rem;margin-top:16px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.75;">
-          Tres capas conectadas que convierten la operación del gimnasio en un flujo de datos accionables.
+        <h1 class="serif text-5xl md:text-7xl leading-[1.1] mb-6">
+          Profesionalizá tu gimnasio: De la intuición a los <span class="grad-text italic">datos.</span>
+        </h1>
+        <p class="text-slate-400 text-lg md:text-xl leading-relaxed max-w-xl mb-10">
+          Dejá de perder alumnos por falta de seguimiento. Centralizá gestión, rutinas y analítica de riesgo en una plataforma diseñada para el campo, no para la oficina.
         </p>
-      </div>
-
-      <!-- TRES PILARES -->
-      <div class="grid md:grid-cols-3 gap-5 mb-16">
-        <!-- Gestión -->
-        <div class="reveal d1 feature-card glass rounded-2xl p-8">
-          <div
-            style="width:44px;height:44px;border-radius:12px;background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-            <svg width="20" height="20" fill="none" stroke="var(--blue)" stroke-width="1.7" viewBox="0 0 24 24">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          </div>
-          <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:10px;">Gestión del Gimnasio</h3>
-          <p style="font-size:.87rem;color:var(--text-muted);line-height:1.75;margin-bottom:16px;">Alumnos, membresías,
-            asistencia y comunicación. Todo el backoffice operativo en un solo lugar.</p>
-          <div style="display:flex;flex-direction:column;gap:7px;font-size:.8rem;color:var(--text-dim);">
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>CRUD alumnos con soft delete</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Planes de membresía y pagos</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Sistema de check-in</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Mensajería interna gym</div>
-          </div>
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+          <a href="#auditoria" class="btn-primary w-full sm:w-auto px-8 py-5 md:py-4 rounded-xl font-bold text-white text-center text-lg md:text-base">
+            Solicitar Auditoría Diagnóstica
+          </a>
+          <a href="login.html" class="w-full sm:w-auto px-8 py-5 md:py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-center hover:bg-white/10 transition-all text-lg md:text-base">
+            Ingresar a la App
+          </a>
         </div>
-
-        <!-- Entrenamiento -->
-        <div class="reveal d2 feature-card glass rounded-2xl p-8" style="border-top-color:var(--cyan);">
-          <div
-            style="width:44px;height:44px;border-radius:12px;background:rgba(79,209,197,.08);border:1px solid rgba(79,209,197,.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-            <svg width="20" height="20" fill="none" stroke="var(--cyan)" stroke-width="1.7" viewBox="0 0 24 24">
-              <path d="M6 5v14M18 5v14M2 9h4M18 9h4M2 15h4M18 15h4" />
-            </svg>
-          </div>
-          <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:10px;">Motor de Entrenamiento</h3>
-          <p style="font-size:.87rem;color:var(--text-muted);line-height:1.75;margin-bottom:16px;">6 programas
-            pre-armados con generación dinámica, builder visual y sesión activa con card deck.</p>
-          <div style="display:flex;flex-direction:column;gap:7px;font-size:.8rem;color:var(--text-dim);">
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>SS · 5×5 · GZCLP · Wendler 5/3/1 · Cube · PPL</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Card deck con carry-over de peso</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Wellbeing check pre-sesión</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Timer con vibración</div>
-          </div>
-        </div>
-
-        <!-- Analítica -->
-        <div class="reveal d3 feature-card glass rounded-2xl p-8" style="border-top-color:var(--green);">
-          <div
-            style="width:44px;height:44px;border-radius:12px;background:rgba(104,211,145,.08);border:1px solid rgba(104,211,145,.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-            <svg width="20" height="20" fill="none" stroke="var(--green)" stroke-width="1.7" viewBox="0 0 24 24">
-              <path d="M18 20V10M12 20V4M6 20v-6" />
-            </svg>
-          </div>
-          <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:10px;">Analítica de Rendimiento</h3>
-          <p style="font-size:.87rem;color:var(--text-muted);line-height:1.75;margin-bottom:16px;">Score 0-100 por
-            atleta, semáforo de riesgo, detección de estancamiento y auto-progression automática.</p>
-          <div style="display:flex;flex-direction:column;gap:7px;font-size:.8rem;color:var(--text-dim);">
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>4 vistas SQL: riesgo, progreso, volumen, estancamiento</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Predicción de sesión mala</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Auto-progression por ejercicio</div>
-            <div style="display:flex;align-items:center;gap:8px;"><svg width="11" height="11" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Panel de riesgo para el profesor</div>
-          </div>
+        <div class="mt-12 flex items-center gap-6 grayscale opacity-40 overflow-x-auto no-scrollbar">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 italic whitespace-nowrap">Core Stack</span>
+          <div class="h-px w-12 bg-white/10 shrink-0"></div>
+          <span class="mono text-[10px] whitespace-nowrap">Supabase Auth</span>
+          <span class="mono text-[10px] whitespace-nowrap">PostgreSQL RLS</span>
+          <span class="mono text-[10px] whitespace-nowrap">Chart.js</span>
         </div>
       </div>
 
-      <!-- SEMÁFORO HIGHLIGHT -->
-      <div class="reveal glass-active rounded-2xl p-8 grid md:grid-cols-2 gap-0">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
-          <div>
-            <span class="badge" style="margin-bottom:16px;display:inline-flex;">Diferencial clave</span>
-            <h3 class="serif" style="font-size:1.6rem;letter-spacing:-.02em;line-height:1.3;margin-bottom:12px;">
-              La inteligencia está<br>en la base de datos
-            </h3>
-            <p style="font-size:.88rem;color:var(--text-muted);line-height:1.8;">
-              Las 4 vistas SQL analíticas centralizan toda la lógica deportiva en PostgreSQL — no en JS del cliente.
-              Cualquier dashboard, API o reporte futuro consume la misma fuente de verdad.
+      <!-- Hero Analytics Card (Demo) -->
+      <div class="relative reveal" style="transition-delay: 200ms">
+        <div class="glass p-6 rounded-3xl float shadow-2xl relative z-10 border-white/10">
+          <div class="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+            <div>
+              <h3 class="font-bold text-lg">Dashboard Atleta #247</h3>
+              <p class="text-[10px] text-slate-500 mono uppercase tracking-widest">v_athlete_risk_analytics · Demo</p>
+            </div>
+            <div class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase">Alerta de Fatiga</div>
+          </div>
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-slate-300">Bienestar Percibido (7d)</span>
+              <div class="flex gap-1">
+                <div class="w-2 h-4 rounded-full bg-green-500"></div>
+                <div class="w-2 h-4 rounded-full bg-green-500"></div>
+                <div class="w-2 h-4 rounded-full bg-yellow-500"></div>
+                <div class="w-2 h-4 rounded-full bg-slate-700"></div>
+                <div class="w-2 h-4 rounded-full bg-slate-700"></div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-slate-300">Stagnation Check</span>
+              <span class="text-xs font-bold text-yellow-400">⚠ 3 sesiones sin mejora</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-slate-300">Adherencia Programada</span>
+              <span class="text-xs mono text-blue-400">82.5%</span>
+            </div>
+          </div>
+          <div class="mt-8 p-4 bg-slate-900/50 rounded-xl border border-white/5">
+            <p class="text-xs text-slate-400 leading-relaxed italic">
+              "Sugerencia: Reducir intensidad (RPE) en ejercicios de cadena posterior para evitar sobrecarga detectada."
             </p>
           </div>
-          <div class="terminal rounded-xl overflow-hidden" style="font-size:.72rem;line-height:1.85;">
-            <div
-              style="background:rgba(5,8,14,.95);padding:9px 14px;border-bottom:1px solid rgba(99,179,237,.08);display:flex;align-items:center;gap:6px;">
-              <div class="dot" style="background:#FF5F57;width:8px;height:8px;"></div>
-              <div class="dot" style="background:#FEBC2E;width:8px;height:8px;"></div>
-              <div class="dot" style="background:#28C840;width:8px;height:8px;"></div>
-              <span style="color:var(--text-dim);margin-left:6px;font-size:.64rem;">v_athlete_risk · 5 CTEs</span>
+        </div>
+        <div class="absolute -top-10 -right-10 w-64 h-64 bg-cyan-500/20 blur-3xl rounded-full"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE APP LINK -->
+  <section class="py-12 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="glass p-1 border-blue-500/30 rounded-[32px] overflow-hidden group">
+            <div class="bg-[#05080F] rounded-[30px] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="max-w-xl">
+                    <span class="mono text-cyan-400 text-[10px] font-bold tracking-widest uppercase mb-4 block text-center md:text-left">Entorno de Producción</span>
+                    <h2 class="serif text-3xl md:text-4xl mb-4 text-center md:text-left">¿Ya sos parte de la Beta?</h2>
+                    <p class="text-slate-400 text-center md:text-left text-sm md:text-base leading-relaxed">Accedé a tu panel de control para gestionar alumnos, rutinas y visualizar métricas en tiempo real.</p>
+                </div>
+                <a href="login.html" class="group-hover:scale-105 transition-transform duration-500 flex flex-col items-center gap-4 bg-blue-500/10 border border-blue-500/20 p-8 rounded-2xl w-full md:w-64 text-center">
+                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                    </div>
+                    <span class="font-bold text-blue-400 uppercase tracking-widest text-xs">Entrar a la App</span>
+                </a>
             </div>
-            <div style="padding:16px;">
-              <div style="color:var(--text-dim);margin-bottom:4px;">-- Vistas analíticas</div>
-              <div><span class="kw">VIEW</span> <span class="prop">v_exercise_progress</span></div>
-              <div style="padding-left:12px;color:var(--text-dim);">-- max weight por sesión</div>
-              <div><span class="kw">VIEW</span> <span class="prop">v_weekly_volume</span></div>
-              <div style="padding-left:12px;color:var(--text-dim);">-- sets/grupo muscular/semana</div>
-              <div><span class="kw">VIEW</span> <span class="prop">v_stagnation_check</span></div>
-              <div style="padding-left:12px;color:var(--text-dim);">-- 3+ sesiones sin mejora</div>
-              <div><span class="kw">VIEW</span> <span class="prop">v_athlete_risk</span></div>
-              <div style="padding-left:12px;"><span class="ok">-- score 0-100 · 5 señales</span></div>
+        </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM (PAS) -->
+  <section id="solucion" class="py-24 px-6 bg-white/[0.02]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20 reveal">
+        <h2 class="serif text-4xl md:text-5xl mb-4 italic italic">¿Tu gimnasio opera o adivina?</h2>
+        <p class="text-slate-400 max-w-2xl mx-auto">Excel, WhatsApp y el papel son los enemigos de la escala. Cuando no medís, no podés mejorar el rendimiento de tus alumnos.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-8 rounded-2xl reveal border-l-4 border-l-blue-500" style="transition-delay: 100ms">
+          <h4 class="text-xl font-bold mb-4">Gestión Operativa</h4>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Membresías, asistencia y comunicación unificadas. Eliminá el caos administrativo y centrate en lo que importa: el atleta.</p>
+          <ul class="text-xs space-y-2 text-slate-500 mono font-medium">
+            <li>+ Control de Pagos Automático</li>
+            <li>+ Sistema de Check-in</li>
+            <li>+ Mensajería Interna (No WhatsApp)</li>
+          </ul>
+        </div>
+        <div class="glass p-8 rounded-2xl reveal border-l-4 border-l-cyan-500" style="transition-delay: 200ms">
+          <h4 class="text-xl font-bold mb-4">Motor de Entrenamiento</h4>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Asigná programas clásicos (531, SS, PPL) o creá rutinas desde cero. Cálculo dinámico de 1RM y progresión automática.</p>
+          <ul class="text-xs space-y-2 text-slate-500 mono font-medium">
+            <li>+ Program Builder Visual</li>
+            <li>+ Registro de Sesión en Vivo</li>
+            <li>+ Algoritmos de Progresión</li>
+          </ul>
+        </div>
+        <div class="glass p-8 rounded-2xl reveal border-l-4 border-l-green-500" style="transition-delay: 300ms">
+          <h4 class="text-xl font-bold mb-4">Analítica de Riesgo</h4>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Detectá el sobre-entrenamiento antes de la lesión. Semáforo de riesgo basado en bienestar, volumen y consistencia.</p>
+          <ul class="text-xs space-y-2 text-slate-500 mono font-medium">
+            <li>+ Wellbeing Check Diario</li>
+            <li>+ Semáforo de Riesgo (RLS)</li>
+            <li>+ Gráficos de Progresión SQL</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASOS DE ÉXITO -->
+  <section id="casos" class="py-24 px-6 bg-white/[0.01]">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 reveal">
+            <span class="badge bg-green-500/10 text-green-400 text-[10px] font-black px-3 py-1 rounded-full mb-6 inline-block uppercase tracking-widest border border-green-500/20">Evidencia de campo</span>
+            <h2 class="serif text-4xl md:text-5xl mb-4 italic">Resultados reales para coaches reales</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto italic">Diseñado para que recuperes el control total de tu operación.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Caso 1 -->
+            <div class="glass rounded-3xl overflow-hidden case-card flex flex-col reveal border-t border-white/5" style="transition-delay: 100ms">
+                <div class="h-40 overflow-hidden bg-slate-900 relative">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&q=80&w=600" width="600" height="400" loading="lazy" alt="Gimnasio Boutique" class="w-full h-full object-cover case-img opacity-40">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-3">Gimnasio Boutique</span>
+                    <h4 class="text-lg font-bold mb-3 serif leading-tight">Gestión Automatizada</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6 italic">"Recuperamos 12 horas semanales de gestión por WhatsApp."</p>
+                    <div class="mt-auto flex justify-between items-end border-t border-white/5 pt-4">
+                        <p class="text-[10px] font-bold text-slate-500 uppercase">Tiempo Ahorrado</p>
+                        <p class="text-lg font-bold text-green-400">12h/sem</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 2 -->
+            <div class="glass rounded-3xl overflow-hidden case-card flex flex-col reveal border-t border-white/5 border-blue-500/20" style="transition-delay: 200ms">
+                <div class="h-40 overflow-hidden bg-slate-900 relative">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" width="600" height="400" loading="lazy" alt="Coach Personal" class="w-full h-full object-cover case-img opacity-40">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-3">Coach Independiente</span>
+                    <h4 class="text-lg font-bold mb-3 serif leading-tight">Escalabilidad 3x</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6 italic">"Pasé de 20 a 65 atletas sin bajar la calidad del seguimiento."</p>
+                    <div class="mt-auto flex justify-between items-end border-t border-white/5 pt-4">
+                        <p class="text-[10px] font-bold text-slate-500 uppercase">Atletas</p>
+                        <p class="text-lg font-bold text-blue-400">65+</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 3 -->
+            <div class="glass rounded-3xl overflow-hidden case-card flex flex-col reveal border-t border-white/5" style="transition-delay: 300ms">
+                <div class="h-40 overflow-hidden bg-slate-900 relative">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=600" width="600" height="400" loading="lazy" alt="Centro de Fuerza" class="w-full h-full object-cover case-img opacity-40">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <span class="text-[10px] font-bold text-green-400 uppercase tracking-widest mb-3">Centro de Fuerza</span>
+                    <h4 class="text-lg font-bold mb-3 serif leading-tight">Data-Driven Strength</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6 italic">"Eliminamos el estancamiento en el 85% de los atletas con el seguimiento 1RM."</p>
+                    <div class="mt-auto flex justify-between items-end border-t border-white/5 pt-4">
+                        <p class="text-[10px] font-bold text-slate-500 uppercase">1RM Tracked</p>
+                        <p class="text-lg font-bold text-green-400">92%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 4 -->
+            <div class="glass rounded-3xl overflow-hidden case-card flex flex-col reveal border-t border-white/5" style="transition-delay: 400ms">
+                <div class="h-40 overflow-hidden bg-slate-900 relative">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=600" width="600" height="400" loading="lazy" alt="Box Training" class="w-full h-full object-cover case-img opacity-40">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <span class="text-[10px] font-bold text-red-400 uppercase tracking-widest mb-3">Box de Entrenamiento</span>
+                    <h4 class="text-lg font-bold mb-3 serif leading-tight">Retención Inteligente</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6 italic">"El semáforo de riesgo nos avisa quién está por dejar antes de que pase."</p>
+                    <div class="mt-auto flex justify-between items-end border-t border-white/5 pt-4">
+                        <p class="text-[10px] font-bold text-slate-500 uppercase">Churn Rate</p>
+                        <p class="text-lg font-bold text-red-400">-18%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- PERSONAL BRAND SECTION -->
+  <section class="py-24 px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div class="relative reveal">
+        <div class="aspect-[4/5] rounded-3xl overflow-hidden glass p-2 border border-white/5 shadow-2xl relative bg-black">
+          <img src="img/lis.png" alt="Lisandro Cacciatore — Builder & Coach" width="800" height="1000" class="w-full h-full object-cover object-top rounded-[20px] opacity-90 grayscale hover:grayscale-0 transition-all duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#030508] via-transparent to-transparent"></div>
+        </div>
+        <div class="absolute -bottom-6 -right-6 glass p-6 rounded-2xl max-w-xs shadow-2xl border border-white/10">
+          <p class="text-sm italic leading-relaxed text-slate-300">
+            "TechFitness nace de la necesidad de tener datos precisos en el campo, con la robustez de un sistema de software industrial."
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="w-8 h-px bg-blue-500"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Lisandro Cacciatore</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <span class="mono text-blue-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Autoridad Híbrida</span>
+        <h2 class="serif text-4xl md:text-5xl mb-8 leading-tight">Software robusto con <span class="grad-text">ADN deportivo.</span></h2>
+        <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
+          <p>Mi formación como <strong>QA de Software</strong> me enseñó a construir sistemas que no fallan. Mi carrera como <strong>Lic. en Educación Física</strong> me enseñó lo que un coach realmente necesita medir.</p>
+          <p>TechFitness es la unión de esos dos mundos. Una arquitectura técnica impecable sobre Supabase, diseñada para resolver la fricción real del entrenamiento de fuerza y rendimiento.</p>
+          <div class="pt-6 grid grid-cols-2 gap-4 text-center">
+            <div class="glass p-4 rounded-xl">
+              <div class="text-2xl font-bold text-white mb-1">+15</div>
+              <div class="text-[10px] uppercase tracking-widest font-bold text-slate-400 whitespace-nowrap">Años Experiencia</div>
+            </div>
+            <div class="glass p-4 rounded-xl">
+              <div class="text-2xl font-bold text-white mb-1">85/85</div>
+              <div class="text-[10px] uppercase tracking-widest font-bold text-slate-400 whitespace-nowrap">Tests Pass</div>
             </div>
           </div>
         </div>
@@ -975,586 +419,191 @@
     </div>
   </section>
 
-  <div class="divider"></div>
-
-  <!-- ═══════════════════════════════════
-       CÓMO FUNCIONA (FLUJO)
-  ══════════════════════════════════════ -->
-  <section class="py-24 px-6 radial-top" id="como-funciona">
-    <div class="max-w-4xl mx-auto">
-      <div class="reveal text-center mb-16">
-        <span class="badge" style="margin-bottom:14px;">El flujo del atleta</span>
-        <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.02em;margin-top:12px;">
-          De datos crudos a decisión<br><span class="grad">en un solo flujo</span>
-        </h2>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:4px;">
-        <!-- Step 1 -->
-        <div class="reveal d1 glass rounded-xl p-6" style="display:flex;gap:18px;align-items:flex-start;">
-          <div class="step-num">01</div>
-          <div>
-            <h4 style="font-weight:700;font-size:.98rem;margin-bottom:6px;">Wellbeing Check <span
-                style="color:var(--text-muted);font-weight:400;font-size:.85rem;">— pre-sesión obligatorio</span></h4>
-            <p style="font-size:.86rem;color:var(--text-muted);line-height:1.75;">El alumno reporta sueño, energía y
-              dolor antes de entrenar. El sistema calcula un score 0-100 y ajusta la carga sugerida si el contexto es
-              adverso.</p>
-          </div>
-        </div>
-        <div
-          style="width:1px;height:20px;background:linear-gradient(to bottom, rgba(99,179,237,.2), transparent);margin-left:18px;">
-        </div>
-
-        <!-- Step 2 -->
-        <div class="reveal d2 glass rounded-xl p-6" style="display:flex;gap:18px;align-items:flex-start;">
-          <div class="step-num">02</div>
-          <div>
-            <h4 style="font-weight:700;font-size:.98rem;margin-bottom:6px;">Sesión activa <span
-                style="color:var(--text-muted);font-weight:400;font-size:.85rem;">— card deck con carry-over</span></h4>
-            <p style="font-size:.86rem;color:var(--text-muted);line-height:1.75;">Interfaz optimizada para registrar
-              cada set con peso y reps. El sistema recuerda el último peso, propaga ajustes a sets siguientes y detecta
-              2+ sets pesados para sugerir bajar carga.</p>
-          </div>
-        </div>
-        <div
-          style="width:1px;height:20px;background:linear-gradient(to bottom, rgba(99,179,237,.2), transparent);margin-left:18px;">
-        </div>
-
-        <!-- Step 3 -->
-        <div class="reveal d3 glass rounded-xl p-6" style="display:flex;gap:18px;align-items:flex-start;">
-          <div class="step-num">03</div>
-          <div>
-            <h4 style="font-weight:700;font-size:.98rem;margin-bottom:6px;">Persistencia anti-fallback <span
-                style="color:var(--text-muted);font-weight:400;font-size:.85rem;">— dato garantizado</span></h4>
-            <p style="font-size:.86rem;color:var(--text-muted);line-height:1.75;">La sesión se guarda vía API con
-              fallback directo a Supabase. Si ambos fallan, se muestra un error con botón de reintento. El dato nunca se
-              pierde.</p>
-          </div>
-        </div>
-        <div
-          style="width:1px;height:20px;background:linear-gradient(to bottom, rgba(99,179,237,.2), transparent);margin-left:18px;">
-        </div>
-
-        <!-- Step 4 -->
-        <div class="reveal d4 glass rounded-xl p-6" style="display:flex;gap:18px;align-items:flex-start;">
-          <div class="step-num">04</div>
-          <div>
-            <h4 style="font-weight:700;font-size:.98rem;margin-bottom:6px;">Vistas SQL <span
-                style="color:var(--text-muted);font-weight:400;font-size:.85rem;">— inteligencia en la DB</span></h4>
-            <p style="font-size:.86rem;color:var(--text-muted);line-height:1.75;">Cada log alimenta las 4 vistas
-              analíticas. v_athlete_risk combina 5 CTEs para producir el score de riesgo del atleta en tiempo real.</p>
-          </div>
-        </div>
-        <div
-          style="width:1px;height:20px;background:linear-gradient(to bottom, rgba(99,179,237,.2), transparent);margin-left:18px;">
-        </div>
-
-        <!-- Step 5 -->
-        <div class="reveal d5 glass-active rounded-xl p-6" style="display:flex;gap:18px;align-items:flex-start;">
-          <div class="step-num" style="background:rgba(99,179,237,.15);border-color:rgba(99,179,237,.35);">05</div>
-          <div>
-            <h4 style="font-weight:700;font-size:.98rem;margin-bottom:6px;">Decisión asistida <span
-                style="color:var(--blue);font-weight:400;font-size:.85rem;">— donde está el valor</span></h4>
-            <p style="font-size:.86rem;color:var(--text-muted);line-height:1.75;">El profesor ve el semáforo de riesgo,
-              la auto-progression sugerida por ejercicio, la predicción de sesión y el estancamiento detectado. Decide
-              con datos, no con intuición.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══════════════════════════════════
-       BIO / DIFERENCIAL
-  ══════════════════════════════════════ -->
-  <section class="py-24 px-6">
-    <div class="max-w-5xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-14 items-center">
-        <div class="reveal d1">
-          <span class="badge" style="margin-bottom:18px;display:inline-flex;">El builder</span>
-          <h2 class="serif"
-            style="font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-.02em;line-height:1.25;margin-bottom:18px;">
-            Construido por alguien<br><span class="grad">que opera gimnasios reales</span>
-          </h2>
-          <div
-            style="color:var(--text-muted);line-height:1.85;font-size:.92rem;display:flex;flex-direction:column;gap:14px;">
-            <p>Vengo del testing de software — aprendí a analizar sistemas, detectar cuellos de botella y entender qué
-              pasa cuando una operación depende demasiado de una persona.</p>
-            <p>Soy licenciado en educación física, especialista en entrenamiento de fuerza con más de 15 años en el
-              rubro. Actualmente coordino 3 gimnasios de uno de los clubes más grandes de mi ciudad — 12 profesores,
-              cientos de alumnos.</p>
-            <p style="color:var(--text);font-weight:500;">TechFitness nace de ese cruce: la mirada de sistemas de un QA
-              de software con el dominio profundo de alguien que opera el negocio todos los días.</p>
-          </div>
-        </div>
-        <div class="reveal d2">
-          <div class="glass-active rounded-2xl p-3" style="display:flex;flex-direction:column;gap:3px;">
-            <img src="img/lis.png" alt="Lisandro Cacciatore" style="width:100%;border-radius:14px;margin-bottom:4px;">
-            <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;background:rgba(99,179,237,.04);">
-              <div
-                style="width:36px;height:36px;border-radius:9px;background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <svg width="15" height="15" fill="none" stroke="var(--blue)" stroke-width="1.8" viewBox="0 0 24 24">
-                  <path
-                    d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18" />
-                </svg>
-              </div>
-              <div>
-                <p style="font-size:.84rem;font-weight:600;margin-bottom:2px;">QA de software</p>
-                <p style="font-size:.78rem;color:var(--text-muted);">Análisis de sistemas y detección de cuellos de
-                  botella</p>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;">
-              <div
-                style="width:36px;height:36px;border-radius:9px;background:rgba(79,209,197,.08);border:1px solid rgba(79,209,197,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <svg width="15" height="15" fill="none" stroke="var(--cyan)" stroke-width="1.8" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              </div>
-              <div>
-                <p style="font-size:.84rem;font-weight:600;margin-bottom:2px;">Especialista en fuerza</p>
-                <p style="font-size:.78rem;color:var(--text-muted);">+15 años en entrenamiento de fuerza y potencia</p>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;">
-              <div
-                style="width:36px;height:36px;border-radius:9px;background:rgba(104,211,145,.08);border:1px solid rgba(104,211,145,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <svg width="15" height="15" fill="none" stroke="var(--green)" stroke-width="1.8" viewBox="0 0 24 24">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
-              </div>
-              <div>
-                <p style="font-size:.84rem;font-weight:600;margin-bottom:2px;">Coordinador operativo</p>
-                <p style="font-size:.78rem;color:var(--text-muted);">3 gimnasios · 12 profesores · operación diaria real
-                </p>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;">
-              <div
-                style="width:36px;height:36px;border-radius:9px;background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <svg width="15" height="15" fill="none" stroke="var(--blue)" stroke-width="1.8" viewBox="0 0 24 24">
-                  <polyline points="16 18 22 12 16 6" />
-                  <polyline points="8 6 2 12 8 18" />
-                </svg>
-              </div>
-              <div>
-                <p style="font-size:.84rem;font-weight:600;margin-bottom:2px;">SaaS Builder</p>
-                <p style="font-size:.78rem;color:var(--text-muted);">TechFitness — arquitectura multitenant en
-                  producción</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══════════════════════════════════
-       AUDITORÍA (oferta de entrada)
-  ══════════════════════════════════════ -->
-  <section class="py-24 px-6 radial-top" id="auditoria">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal text-center mb-16">
-        <span class="badge" style="margin-bottom:14px;">Antes del software</span>
-        <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.02em;margin-top:12px;">
-          Entendé tu sistema<br><span class="grad">antes de escalar</span>
-        </h2>
-        <p
-          style="color:var(--text-muted);font-size:.97rem;margin-top:14px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75;">
-          La auditoría diagnóstica es el primer paso para cualquier gimnasio que quiere profesionalizar su operación con
-          datos.
+  <!-- AUDITORIA (High Value Entry Offer) -->
+  <section id="auditoria" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto glass p-12 rounded-[40px] border border-blue-500/20 reveal relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-3xl rounded-full"></div>
+      <div class="relative z-10 text-center max-w-3xl mx-auto">
+        <span class="bg-blue-500 text-white text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-tighter mb-6 inline-block">Diagnóstico Profesional</span>
+        <h2 class="serif text-4xl md:text-5xl mb-6 leading-tight">Antes del software, necesitás un sistema.</h2>
+        <p class="text-slate-400 text-lg mb-12">
+          La Auditoría Diagnóstica de Operación es una sesión 1:1 de 60 minutos donde mapeamos tu gimnasio, detectamos fugas de ingresos y definimos tu hoja de ruta de datos.
         </p>
-      </div>
-
-      <div class="reveal glass-active rounded-3xl overflow-hidden" style="max-width:620px;margin:0 auto;">
-        <div style="padding:36px 44px 28px;border-bottom:1px solid var(--border);text-align:center;">
-          <span class="badge" style="margin-bottom:16px;">Auditoría Diagnóstica</span>
-          <div style="display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:6px;">
-            <span class="mono" style="font-size:.9rem;color:var(--text-muted);">USD</span>
-            <span class="serif grad" style="font-size:4.8rem;line-height:1;letter-spacing:-.03em;">300</span>
+        <div class="grid md:grid-cols-2 gap-8 mb-12 text-left">
+          <div class="space-y-4">
+            <div class="flex gap-3 text-sm font-medium"><span class="text-blue-400">✓</span> Mapa de puntos de fricción operativa.</div>
+            <div class="flex gap-3 text-sm font-medium"><span class="text-blue-400">✓</span> Documento con 3 "Quick Wins" inmediatos.</div>
           </div>
-          <p style="font-size:.84rem;color:var(--text-muted);">Pago único. Sin cuotas ni suscripción posterior.</p>
-        </div>
-        <div style="padding:32px 44px;">
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:30px;">
-            <li style="display:flex;align-items:center;gap:11px;font-size:.9rem;"><svg width="15" height="15"
-                fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Entrevista diagnóstica de 60 minutos</li>
-            <li style="display:flex;align-items:center;gap:11px;font-size:.9rem;"><svg width="15" height="15"
-                fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Mapa del sistema con puntos de fricción</li>
-            <li style="display:flex;align-items:center;gap:11px;font-size:.9rem;"><svg width="15" height="15"
-                fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Documento: 3 problemas + 3 quick wins</li>
-            <li style="display:flex;align-items:center;gap:11px;font-size:.9rem;"><svg width="15" height="15"
-                fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Hoja de ruta priorizada</li>
-            <li style="display:flex;align-items:center;gap:11px;font-size:.9rem;"><svg width="15" height="15"
-                fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Sesión de cierre 1:1 con recomendaciones</li>
-            <li style="display:flex;align-items:center;gap:11px;font-size:.9rem;"><svg width="15" height="15"
-                fill="none" stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg><strong>14 días de acceso completo a TechFitness</strong></li>
-            <li style="display:flex;align-items:center;gap:11px;font-size:.9rem;color:var(--text-muted);"><svg
-                width="15" height="15" fill="none" stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>Garantía de devolución si no cumple lo prometido</li>
-          </ul>
-          <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20reservar%20una%20auditor%C3%ADa%20de%20sistema"
-            target="_blank" rel="noopener noreferrer" class="btn-main" style="width:100%;justify-content:center;font-size:1rem;padding:17px;">
-            Reservar auditoría
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
-          <p style="text-align:center;font-size:.76rem;color:var(--text-dim);margin-top:14px;">Te confirmo
-            disponibilidad dentro de las 24 hs vía WhatsApp.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══════════════════════════════════
-       PRICING SaaS
-  ══════════════════════════════════════ -->
-  <section class="py-24 px-6" id="precio">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal text-center mb-16">
-        <span class="badge" style="margin-bottom:14px;">TechFitness SaaS</span>
-        <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.02em;margin-top:12px;">Planes del
-          software</h2>
-        <p style="color:var(--text-muted);font-size:.9rem;margin-top:12px;">
-          Actualmente en beta. Los primeros gimnasios entran con precio early adopter.<br>
-          <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20hablar%20del%20plan%20para%20mi%20gimnasio"
-            target="_blank" rel="noopener noreferrer" style="color:var(--blue);text-decoration:none;">Contactame para hablar de tu caso →</a>
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-5 items-start">
-        <!-- Starter -->
-        <div class="reveal d1 plan-card glass">
-          <div style="margin-bottom:24px;">
-            <p
-              style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">
-              Starter</p>
-            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
-              <span style="font-size:.85rem;color:var(--text-muted);">USD</span>
-              <span class="serif" style="font-size:3rem;line-height:1;letter-spacing:-.02em;">29</span>
-              <span style="font-size:.82rem;color:var(--text-muted);">/mes</span>
-            </div>
-            <p style="font-size:.8rem;color:var(--text-muted);">Para gimnasios que arrancan</p>
+          <div class="space-y-4">
+            <div class="flex gap-3 text-sm font-medium"><span class="text-cyan-400">✓</span> 14 días de acceso total a TechFitness.</div>
+            <div class="flex gap-3 text-sm font-medium text-white font-bold"><span class="text-cyan-400">✓</span> Garantía de satisfacción total.</div>
           </div>
-          <ul
-            style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;font-size:.83rem;color:var(--text-muted);">
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Hasta 50 alumnos</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>2 profesores</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Gestión + rutinas + sesión activa</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--blue)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Wellbeing check</li>
-            <li style="display:flex;gap:9px;align-items:center;color:var(--text-dim);"><svg width="12" height="12"
-                fill="none" stroke="var(--text-dim)" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>Analytics avanzada</li>
-            <li style="display:flex;gap:9px;align-items:center;color:var(--text-dim);"><svg width="12" height="12"
-                fill="none" stroke="var(--text-dim)" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>Semáforo de riesgo</li>
-          </ul>
-          <a href="https://wa.me/543415040228?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20TechFitness"
-            target="_blank" rel="noopener noreferrer" class="btn-ghost" style="width:100%;justify-content:center;">
-            Hablar del plan →
-          </a>
         </div>
-
-        <!-- Pro (featured) -->
-        <div class="reveal d2 plan-card plan-featured">
-          <div style="margin-bottom:24px;">
-            <p
-              style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">
-              Pro</p>
-            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
-              <span style="font-size:.85rem;color:var(--text-muted);">USD</span>
-              <span class="serif grad" style="font-size:3rem;line-height:1;letter-spacing:-.02em;">59</span>
-              <span style="font-size:.82rem;color:var(--text-muted);">/mes</span>
-            </div>
-            <p style="font-size:.8rem;color:var(--text-muted);">Para gimnasios que quieren escalar</p>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 pt-10 border-t border-white/5">
+          <div class="text-left">
+            <div class="text-4xl serif grad-text leading-none">USD 300</div>
+            <p class="text-[10px] uppercase font-bold tracking-widest text-slate-500 mt-2 italic">Pago único · Inversión Estratégica</p>
           </div>
-          <ul
-            style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;font-size:.83rem;color:var(--text-muted);">
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Alumnos ilimitados</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Profesores ilimitados</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Todo lo del plan Starter</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Score 0-100 por atleta</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Semáforo de riesgo</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Auto-progression y predicción</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--cyan)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Vistas SQL analíticas completas</li>
-          </ul>
-          <a href="https://wa.me/543415040228?text=Hola%2C%20me%20interesa%20el%20plan%20Pro%20de%20TechFitness"
-            target="_blank" rel="noopener noreferrer" class="btn-main" style="width:100%;justify-content:center;">
-            Hablar del plan →
-          </a>
-        </div>
-
-        <!-- Enterprise -->
-        <div class="reveal d3 plan-card glass">
-          <div style="margin-bottom:24px;">
-            <p
-              style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">
-              Institución</p>
-            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
-              <span class="serif" style="font-size:2rem;line-height:1;letter-spacing:-.02em;color:var(--text-muted);">A
-                medida</span>
-            </div>
-            <p style="font-size:.8rem;color:var(--text-muted);">Clubes, centros y academias</p>
-          </div>
-          <ul
-            style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;font-size:.83rem;color:var(--text-muted);">
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Todo lo del plan Pro</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Múltiples sedes (multi-tenant)</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Branding propio</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Integración con sistemas existentes</li>
-            <li style="display:flex;gap:9px;align-items:center;"><svg width="12" height="12" fill="none"
-                stroke="var(--green)" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Soporte prioritario</li>
-          </ul>
-          <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20hablar%20del%20plan%20para%20mi%20institución"
-            target="_blank" rel="noopener noreferrer" class="btn-ghost" style="width:100%;justify-content:center;">
-            Hablar del caso →
+          <a href="https://wa.me/543415040228?text=Hola%20Lisandro%2C%20quiero%20reservar%20mi%20auditor%C3%ADa%20diagn%C3%B3stica."
+             target="_blank" rel="noopener noreferrer"
+             class="btn-primary px-12 py-5 rounded-2xl font-bold text-lg text-white w-full md:w-auto">
+            Reservar Mi Auditoría →
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <!-- PRICING -->
+  <section id="pricing" class="py-24 px-6 bg-white/[0.01]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20 reveal">
+        <h2 class="serif text-4xl md:text-5xl mb-4 italic">Planes SaaS Beta</h2>
+        <p class="text-slate-400">Unite a la beta y bloqueá el precio actual para siempre.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 items-stretch">
+        <div class="glass p-8 rounded-3xl reveal flex flex-col" style="transition-delay: 100ms">
+          <div class="mb-10">
+            <h4 class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Starter</h4>
+            <div class="text-4xl font-bold mb-2">USD 29<span class="text-sm font-normal text-slate-500 italic">/mes</span></div>
+            <p class="text-xs text-slate-400 italic">Ideal para centros boutique.</p>
+          </div>
+          <ul class="space-y-4 text-sm text-slate-400 mb-12 flex-1">
+            <li class="flex gap-2 font-medium"><span>•</span> Hasta 50 Alumnos</li>
+            <li class="flex gap-2 font-medium"><span>•</span> Gestión de Membresías</li>
+            <li class="flex gap-2 font-medium"><span>•</span> Builder de Rutinas</li>
+            <li class="flex gap-2 font-medium"><span>•</span> Registro de Entrenamiento</li>
+          </ul>
+          <a href="https://wa.me/543415040228?text=Hola%20Lisandro%2C%20me%20interesa%20el%20plan%20Starter."
+             class="w-full py-4 rounded-xl border border-white/10 hover:bg-white/5 text-center text-sm font-bold transition-all">Solicitar Acceso</a>
+        </div>
+        <div class="glass p-8 rounded-3xl reveal border border-blue-500/40 bg-blue-500/[0.03] scale-105 relative z-10 flex flex-col" style="transition-delay: 200ms">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">Recomendado</div>
+          <div class="mb-10">
+            <h4 class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-2 font-bold">Performance Pro</h4>
+            <div class="text-4xl font-bold mb-2">USD 59<span class="text-sm font-normal text-slate-500 italic">/mes</span></div>
+            <p class="text-xs text-slate-400 italic">El sistema operativo completo.</p>
+          </div>
+          <ul class="space-y-4 text-sm text-slate-300 mb-12 flex-1 font-medium">
+            <li class="flex gap-3"><span class="text-blue-400 font-bold">✓</span> Alumnos Ilimitados</li>
+            <li class="flex gap-3"><span class="text-blue-400 font-bold">✓</span> Semáforo de Riesgo (Vistas SQL)</li>
+            <li class="flex gap-3"><span class="text-blue-400 font-bold">✓</span> Analítica de Progresión 1RM</li>
+            <li class="flex gap-3"><span class="text-blue-400 font-bold">✓</span> Soporte Prioritario 1:1</li>
+          </ul>
+          <a href="https://wa.me/543415040228?text=Hola%20Lisandro%2C%20quiero%20el%20plan%20Performance%20Pro."
+             class="btn-primary w-full py-5 rounded-xl text-center text-sm font-bold text-white transition-all">Empezar Beta</a>
+        </div>
+        <div class="glass p-8 rounded-3xl reveal flex flex-col" style="transition-delay: 300ms">
+          <div class="mb-10">
+            <h4 class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Institución</h4>
+            <div class="text-4xl font-bold mb-2 italic">A medida</div>
+            <p class="text-xs text-slate-400 italic">Para clubes multi-sede.</p>
+          </div>
+          <ul class="space-y-4 text-sm text-slate-400 mb-12 flex-1">
+            <li class="flex gap-2 font-medium"><span>•</span> Gestión Multi-tenant</li>
+            <li class="flex gap-2 font-medium"><span>•</span> Branding Personalizado</li>
+            <li class="flex gap-2 font-medium"><span>•</span> Roles y Permisos Avanzados</li>
+            <li class="flex gap-2 font-medium"><span>•</span> Integración con APIs</li>
+          </ul>
+          <a href="https://wa.me/543415040228?text=Hola%20Lisandro%2C%20me%20interesa%20el%20plan%20Institucional."
+             class="w-full py-4 rounded-xl border border-white/10 hover:bg-white/5 text-center text-sm font-bold transition-all">Consultar Caso</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- FAQ -->
-  <section class="py-24 px-6" id="faq">
-    <div class="max-w-3xl mx-auto">
-      <div class="reveal text-center mb-16">
-        <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.02em;">Preguntas frecuentes</h2>
-      </div>
-      <div class="reveal d1" style="border-top:1px solid var(--border);">
-        <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">¿En qué se diferencia TechFitness de Trainerize o
-            TrueCoach?<span class="faq-icon">+</span></button>
-          <div class="faq-body">
-            <p>La mayoría de las herramientas resuelven la capa de gestión (rutinas, comunicación). TechFitness además
-              calcula un score de rendimiento 0-100 por atleta, detecta riesgo de sobrecarga y abandono en tiempo real,
-              y genera sugerencias de auto-progression basadas en datos históricos. La lógica vive en vistas SQL en la
-              base de datos, no en el frontend — eso la hace consistente en cualquier dashboard o reporte.</p>
+  <section id="faq" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="serif text-4xl text-center mb-16 italic">Dudas frecuentes</h2>
+      <div class="space-y-4">
+        <details class="group glass rounded-2xl p-6 transition-all reveal">
+          <summary class="flex justify-between items-center font-bold cursor-pointer">
+            <span>¿En qué se diferencia TechFitness de Trainerize o TrueCoach?</span>
+            <span class="faq-icon text-xl text-slate-400 ml-4 font-normal">+</span>
+          </summary>
+          <div class="mt-4 text-sm text-slate-400 leading-relaxed space-y-3">
+            <p>La mayoría de las herramientas resuelven la capa de gestión (rutinas y comunicación). TechFitness va un paso más allá al integrar <strong>inteligencia deportiva directamente en la base de datos</strong>.</p>
+            <p>Calculamos un score de rendimiento 0-100 en tiempo real, detectamos el riesgo de sobrecarga y abandono automáticamente y sugerimos progresiones basadas en algoritmos de fuerza reales. No somos solo un registro; somos un asistente de toma de decisiones para el coach.</p>
           </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-trigger" id="faq-btn-2" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-2">¿Es solo para entrenamiento de fuerza?<span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-body" id="faq-2" role="region" aria-labelledby="faq-btn-2">
-            <p>El motor de programas tiene foco en fuerza (Starting Strength, Wendler, PPL, etc.) porque ahí está el
-              dominio más profundo. Pero la gestión de alumnos, membresías, sesiones y analítica de rendimiento funciona
-              para cualquier modalidad. Si trabajás con atletismo, funcional o deportes, la plataforma se adapta — los
-              programas pre-armados son opcionales.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">¿Qué incluyen los 14 días de acceso demo de la
-            auditoría?<span class="faq-icon">+</span></button>
-          <div class="faq-body">
-            <p>Acceso completo a TechFitness con tu gimnasio real. Podés cargar alumnos, asignar rutinas, ejecutar
-              sesiones y ver cómo quedaría tu operación sistematizada. No es una demo limitada — es el sistema completo.
-              No hay obligación de contratar nada después, pero la mayoría de los que lo prueban con datos reales
-              siguen.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">¿Qué tan complejo es para los profesores adoptar la
-            plataforma?<span class="faq-icon">+</span></button>
-          <div class="faq-body">
-            <p>El onboarding es guiado — hay un wizard de 4 pasos para el admin y un tour para los alumnos nuevos. La
-              interfaz de sesión activa (card deck con botones +/-) fue diseñada para usarse en el gimnasio, no en una
-              oficina. El flujo de bienestar→sesión→log tarda menos de 2 minutos desde el celular. La curva de
-              aprendizaje para el alumno es de 1 sesión.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">¿Está la plataforma en producción o es un
-            prototipo?<span class="faq-icon">+</span></button>
-          <div class="faq-body">
-            <p>Está en beta avanzada. El sistema tiene 85/85 tests unitarios y E2E pasando, RLS multitenant en
-              producción con Supabase, y cobre sesiones reales con datos reales. "Beta" significa que estoy incorporando
-              los primeros gimnasios piloto con acompañamiento directo — no significa que esté incompleto.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">¿Qué pasa con los USD 300 de la auditoría si no me
-            sirve?<span class="faq-icon">+</span></button>
-          <div class="faq-body">
-            <p>Si al finalizar la sesión de cierre sentís que el documento no refleja tu realidad o que las
-              recomendaciones no son accionables, te devuelvo el 100% sin preguntas. La garantía existe porque el
-              servicio tiene que valer lo que cuesta.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- CTA FINAL -->
-  <section class="py-28 px-6 text-center radial-bottom">
-    <div class="max-w-3xl mx-auto">
-      <div class="reveal" style="position:relative;display:inline-block;margin-bottom:8px;">
-        <span
-          style="font-family:'DM Serif Display',serif;font-size:6rem;line-height:1;color:rgba(99,179,237,.1);position:absolute;top:-8px;left:0;">"</span>
-        <p class="serif"
-          style="font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-.02em;line-height:1.3;padding-top:36px;">
-          Tu criterio como coach no se reemplaza.<br><span class="grad">Se potencia con datos.</span>
-        </p>
-      </div>
-      <p class="reveal d1"
-        style="color:var(--text-muted);font-size:.97rem;margin:22px auto 34px;max-width:440px;line-height:1.75;">
-        Si ya tenés alumnos y resultados, el siguiente paso es operar con un sistema que te diga qué está pasando antes
-        de que el atleta te lo cuente.
-      </p>
-      <div class="reveal d2" style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;">
-        <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20ver%20una%20demo%20de%20TechFitness" target="_blank" rel="noopener noreferrer"
-          class="btn-main">
-          Ver demo de TechFitness
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
-        <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20reservar%20una%20auditor%C3%ADa%20de%20sistema"
-          target="_blank" rel="noopener noreferrer" class="btn-ghost">
-          Reservar auditoría — USD 300
-        </a>
+        </details>
+        <details class="group glass rounded-2xl p-6 transition-all reveal">
+          <summary class="flex justify-between items-center font-bold cursor-pointer">
+            <span>¿Por qué centralizar la analítica en vistas SQL?</span>
+            <span class="faq-icon text-xl text-slate-400 ml-4 font-normal">+</span>
+          </summary>
+          <p class="mt-4 text-sm text-slate-400 leading-relaxed italic">
+            Como QA, sé que la consistencia es clave. Al usar vistas de PostgreSQL (`v_athlete_risk`, `v_weekly_volume`), garantizamos que cualquier interfaz (dashboard, app o API) vea exactamente los mismos datos de rendimiento sin depender del navegador del usuario ni de procesos lentos de JS en el cliente.
+          </p>
+        </details>
+        <details class="group glass rounded-2xl p-6 transition-all reveal">
+          <summary class="flex justify-between items-center font-bold cursor-pointer">
+            <span>¿Mis datos están seguros y aislados de otros gimnasios?</span>
+            <span class="faq-icon text-xl text-slate-400 ml-4 font-normal">+</span>
+          </summary>
+          <p class="mt-4 text-sm text-slate-400 leading-relaxed">
+            Sí. Utilizamos <strong>Row Level Security (RLS)</strong> nativo de PostgreSQL en Supabase. Cada registro está vinculado a un gym_id único y las políticas de seguridad a nivel de base de datos impiden que un usuario de un gimnasio vea siquiera la existencia de datos de otro.
+          </p>
+        </details>
+        <details class="group glass rounded-2xl p-6 transition-all reveal">
+          <summary class="flex justify-between items-center font-bold cursor-pointer">
+            <span>¿Qué incluye la Auditoría Diagnóstica de USD 300?</span>
+            <span class="faq-icon text-xl text-slate-400 ml-4 font-normal">+</span>
+          </summary>
+          <p class="mt-4 text-sm text-slate-400 leading-relaxed">
+            Es una consultoría profunda. Mapeamos tu flujo operativo, detectamos dónde estás perdiendo tiempo o dinero (fugas de alumnos), y te entregamos una hoja de ruta tecnológica. Incluye 14 días de acceso total a TechFitness para que veas la solución aplicada a tus propios alumnos. Si al final de la sesión sentís que no te aportó valor, te devolvemos el dinero sin preguntas.
+          </p>
+        </details>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer style="padding:36px 24px;border-top:1px solid var(--border);">
-    <div
-      style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;">
+  <footer class="py-12 border-t border-white/5 px-6 mt-12 bg-black">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div>
-        <p class="mono" style="font-size:.78rem;color:var(--blue);margin-bottom:3px;">TechFitness · Lisandro Cacciatore
-        </p>
-        <p style="font-size:.76rem;color:var(--text-dim);">Sistema operativo de rendimiento deportivo · Beta</p>
+        <span class="mono text-blue-400 font-bold tracking-tighter uppercase">LC // TechFitness</span>
+        <p class="text-[10px] text-slate-600 mt-2 uppercase tracking-widest font-black italic">Operando en Real-time con Supabase</p>
       </div>
-      <div style="display:flex;gap:20px;align-items:center;">
-        <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20ver%20una%20demo%20de%20TechFitness" target="_blank" rel="noopener noreferrer"
-          class="nav-cta" style="font-size:.8rem;">Ver demo →</a>
+      <div class="flex gap-8 text-xs font-bold text-slate-500 uppercase tracking-widest">
+        <a href="https://www.linkedin.com/in/lisandro-cacciatore/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+        <a href="https://github.com/LisandroCacciatore" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+        <a href="login.html" class="hover:text-white transition-colors">Acceso App</a>
       </div>
+      <p class="text-[10px] text-slate-700 font-medium">© 2026 Lisandro Cacciatore. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- STICKY MOBILE CTA -->
-  <div id="sticky-cta">
-    <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20ver%20una%20demo%20de%20TechFitness" target="_blank" rel="noopener noreferrer"
-      class="btn-main" style="width:100%;justify-content:center;font-size:.94rem;padding:14px;">
-      Ver demo de TechFitness →
-    </a>
-  </div>
-
   <script>
-    const revealObs = new IntersectionObserver(e => {
-      e.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); revealObs.unobserve(el.target); } });
-    }, { threshold: .08 });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-    document.querySelectorAll('.anim').forEach(el => { el.style.opacity = ''; });
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
-    const stickyCta = document.getElementById('sticky-cta');
-    const heroEl = document.querySelector('section');
-    if (heroEl) {
-      new IntersectionObserver(e => {
-        stickyCta.classList.toggle('visible', !e[0].isIntersecting);
-      }, { threshold: .1 }).observe(heroEl);
-    }
-    function toggleFaq(trigger) {
-      const item = trigger.closest('.faq-item');
-      const body = item.querySelector('.faq-body');
-      const wasOpen = item.classList.contains('open');
-      const isExpanded = !wasOpen;
-      
-      trigger.setAttribute('aria-expanded', isExpanded);
-      body.setAttribute('aria-hidden', !isExpanded);
-      
-      document.querySelectorAll('.faq-item.open').forEach(el => {
-        const btn = el.querySelector('.faq-trigger');
-        const b = el.querySelector('.faq-body');
-        btn.setAttribute('aria-expanded', 'false');
-        b.setAttribute('aria-hidden', 'true');
-        el.classList.remove('open');
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-      if (!wasOpen) item.classList.add('open');
-    }
-    
-    document.querySelectorAll('.faq-item').forEach((item, i) => {
-      const btn = item.querySelector('.faq-trigger');
-      const body = item.querySelector('.faq-body');
-      btn.id = 'faq-btn-' + (i + 1);
-      body.id = 'faq-' + (i + 1);
-      btn.setAttribute('aria-controls', 'faq-' + (i + 1));
-      body.setAttribute('aria-labelledby', 'faq-btn-' + (i + 1));
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Navbar Scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.remove('open'));
     });
   </script>
 </body>
