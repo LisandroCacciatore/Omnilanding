@@ -1,0 +1,12 @@
+{
+"rewrites": [
+{
+"source": "/app",
+"destination": "https://omnicomrade.vercel.app/login.html"
+},
+{
+"source": "/app/:path*",
+"destination": "https://omnicomrade.vercel.app/:path*"
+}
+]
+}
