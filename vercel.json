@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/app",
-      "destination": "https://omnicomrade.vercel.app/login.html"
+      "destination": "https://omnicomrade.vercel.app/login"
     },
     {
       "source": "/signin",
-      "destination": "https://omnicomrade.vercel.app/login.html"
+      "destination": "https://omnicomrade.vercel.app/login"
     },
     {
       "source": "/login",
-      "destination": "https://omnicomrade.vercel.app/login.html"
+      "destination": "https://omnicomrade.vercel.app/login"
     },
     {
       "source": "/app/:path*",
