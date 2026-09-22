@@ -801,11 +801,12 @@
       }
 
       // Lead capture (C4) — guarda en Supabase si está configurado; si no, fallback a WhatsApp
-      // Config: reemplazá SUPABASE_URL y SUPABASE_ANON_KEY con las de tu proyecto,
-      // y creá la tabla `leads` (email, gym, created_at) con RLS para insert anon.
+      // Config: proyecto Supabase del producto. La anon key es pública por diseño;
+      // la tabla `leads` y su policy de insert anon viven en supabase/migrations/.
+      // El fallback a WhatsApp es la ruta de ERROR: nunca mostrar éxito sin insert real.
       const LEAD_CONFIG = {
-        supabaseUrl: '',   // ej: 'https://xxxx.supabase.co'
-        anonKey: '',       // ej: 'eyJhbGciOi...'
+        supabaseUrl: 'https://pugwofiapgdzxpdbbtnn.supabase.co',
+        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1Z3dvZmlhcGdkenhwZGJidG5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMjQ2OTIsImV4cCI6MjA4ODkwMDY5Mn0.18yf_cFDH11GemKdNC7TvFvPMAQdeXj1TTaXBH5L7gE',
         table: 'leads'
       };
       document.getElementById('lead-form')?.addEventListener('submit', async (e) => {
@@ -829,7 +830,7 @@
               'Hola! Quiero el checklist de retención. Mi email es ' + email + (gym ? ' (gimnasio: ' + gym + ')' : '')
             );
             window.open(wa, '_blank');
-            okEl.style.display = 'block';
+            errEl.style.display = 'block';
           }
         } catch (err) {
           errEl.style.display = 'block';
