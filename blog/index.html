@@ -1,0 +1,125 @@
+<!doctype html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog &amp;mdash; Lisandro Cacciatore</title>
+  <meta name="description" content="Notas de trabajo sobre automatización, datos y calidad de software aplicados a clubes y gimnasios." />
+  <meta property="og:title" content="Blog &amp;mdash; Lisandro Cacciatore" />
+  <meta property="og:description" content="Notas de trabajo sobre automatización, datos y calidad de software aplicados a clubes y gimnasios." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://lcacciatore.com/blog/" />
+  <meta property="og:image" content="https://lcacciatore.com/img/og-cover.png" />
+  <meta property="og:locale" content="es_AR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://lcacciatore.com/blog/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind por CDN, igual que la landing. NO es opcional: el navbar que se
+       extrae del sitio usa clases utilitarias (w-10 h-10, flex, hidden sm:block).
+       Sin esto, la foto del navbar se renderiza a tamaño natural y tapa la página.
+       Si algún día se migra el CDN a un build, se migra para la landing y el blog
+       juntos — ver el README del diseño. -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+<div class="page-shell">
+<nav id="navbar">
+      <div class="nav-inner relative glass" style="padding:12px 16px; border-radius: 20px;">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl overflow-hidden bg-slate-900/70 border border-white/10 shadow-lg flex items-center justify-center p-1.5">
+            <img src="../img/coach-thumb.jpg" alt="Lisandro Cacciatore" class="w-full h-full object-cover rounded-xl" onerror="this.style.display='none'" />
+          </div>
+          <span class="nav-logo hidden sm:block serif-title tracking-normal">Lisandro <span style="color:#3B82F6">Cacciatore</span></span>
+        </div>
+
+        <div class="nav-links">
+          <a href="../index.html#problema">El problema</a>
+          <a href="../index.html#consultoria">Consultoría</a>
+          <a href="../index.html#sobre-mi">Sobre mí</a>
+          <a href="../index.html#techfitness">TechFitness</a>
+          <a href="../index.html#faq">FAQ</a><a href="index.html" class="activo">Blog</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="https://omnicomrade.vercel.app/" class="hidden md:block text-sm font-semibold" style="color:#60a5fa">Acceder →</a>
+          <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20consultar%20una%20auditor%C3%ADa%20operativa%20para%20mi%20gimnasio" target="_blank" class="btn-primary nav-cta rounded-xl">Consultar</a>
+          <button id="mob-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl" style="background:rgba(255,255,255,.04);border:1px solid var(--border);" aria-label="Menú">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+
+        <div id="mobile-menu">
+          <a href="../index.html#problema">El problema</a>
+          <a href="../index.html#consultoria">Consultoría</a>
+          <a href="../index.html#sobre-mi">Sobre mí</a>
+          <a href="../index.html#techfitness">TechFitness</a>
+          <a href="../index.html#faq">FAQ</a><a href="index.html" class="activo">Blog</a>
+          <a href="https://wa.me/543415040228?text=Hola%2C%20quiero%20consultar%20una%20auditor%C3%ADa%20operativa%20para%20mi%20gimnasio" target="_blank" style="color:#3B82F6;font-weight:700;">Consultar auditoría →</a>
+        </div>
+      </div>
+    </nav>
+  <section class="blog-head">
+    <div class="container-lg">
+      <div class="centrado">
+        <span class="badge badge-blue mono" style="margin-bottom:22px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#3B82F6;display:inline-block;box-shadow:0 0 0 6px rgba(59,130,246,.12);"></span>
+          Blog t&eacute;cnico
+        </span>
+        <h1 class="section-title serif-title" style="margin-top:14px;">
+          Lo que aprendo <span class="grad">automatizando clubes</span>
+        </h1>
+        <p class="section-subtitle">
+          Notas de trabajo real: qu&eacute; se automatiza, qu&eacute; no conviene, y por qu&eacute;. Cada afirmaci&oacute;n con su fuente.
+        </p>
+      </div>
+      <div class="filtros"><button data-filtro="*" class="on">Todos</button></div>
+    </div>
+  </section>
+
+  <section class="section-tight" style="padding-top:34px;">
+    <div class="container-lg">
+      <div class="post-list">
+<p class="vacio">Todav&iacute;a no hay art&iacute;culos publicados.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <div class="container-lg" style="display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between;">
+      <span class="mono" style="font-size:.75rem; color:#5B6476;">&copy; 2026 Lisandro Cacciatore</span>
+      <div style="display:flex; gap:22px; font-family:'DM Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:#5B6476;">
+        <a href="../index.html#consultoria" style="color:#94A3B8; text-decoration:none;">Consultor&iacute;a</a>
+        <a href="../blog/" style="color:#94A3B8; text-decoration:none;">Blog</a>
+        <a href="https://wa.me/543415040228" style="color:#94A3B8; text-decoration:none;">Contacto</a>
+      </div>
+    </div>
+  </footer>
+</div>
+<script>
+  addEventListener('scroll', function () {
+    document.getElementById('navbar').classList.toggle('scrolled', scrollY > 40);
+  });
+</script>
+</body>
+</html>
+
+<script>
+  (function () {
+    var botones = document.querySelectorAll('.filtros button');
+    var tarjetas = document.querySelectorAll('.post-card');
+    botones.forEach(function (b) {
+      b.addEventListener('click', function () {
+        botones.forEach(function (o) { o.classList.remove('on'); });
+        b.classList.add('on');
+        var f = b.getAttribute('data-filtro');
+        tarjetas.forEach(function (t) {
+          var tags = (t.getAttribute('data-tags') || '').split(' ');
+          t.style.display = (f === '*' || tags.indexOf(f) !== -1) ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
