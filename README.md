@@ -1,42 +1,81 @@
-# Omnilanding — Landing de consultoría
+# Omnilanding — Portfolio QA + Blog
 
-**Sitio comercial de la oferta de auditoría operativa para dueños de gimnasios.**
+**`lcacciatore.com` sirve tres superficies desde un mismo repo:**
 
-🔗 **[lcacciatore.com](https://lcacciatore.com/)**
+| Ruta | Qué es | Tecnología |
+|---|---|---|
+| `/` | **Portfolio QA / AI Evaluation** | React 18 + Vite 5 + Tailwind 3 |
+| `/blog/` | Notas técnicas (automatización, datos, calidad) | HTML estático + Tailwind CDN |
+| `/consultoria/` | Landing comercial: Auditoría Operativa para gimnasios (con captura de leads a Supabase) | HTML estático + Tailwind CDN |
 
----
+## Por qué el repo está armado así
 
-## Qué resuelve
+Vite construye la raíz y **copia `public/` tal cual a `dist/`**. Por eso el blog y la
+landing de consultoría viven en `public/`: no se procesan con React, pero viajan en el
+mismo deploy y siguen disponibles en sus URLs.
 
-Un gimnasio pierde alumnos y no sabe exactamente por qué: se atribuye a la competencia, a la zona o a la época. La oferta es una **Auditoría Operativa 1:1** que identifica la causa real de la fuga y entrega un plan accionable para retener. El sitio existe para captar ese interés y convertir la visita en una conversación, no para explicar todo lo que hace el producto.
+```
+public/
+├── blog/          -> https://lcacciatore.com/blog/
+├── consultoria/   -> https://lcacciatore.com/consultoria/
+└── img/           -> assets compartidos por las tres superficies
+tools/
+└── og-cover.html  -> fuente de img/og-qa.png (no se despliega)
+```
 
-## Mi rol
+> El nav del blog apunta a las secciones de `/consultoria/` (`#problema`, `#consultoria`,
+> `#sobre-mi`, `#techfitness`, `#faq`). Si se mueve la landing, hay que repuntar
+> `public/blog/*/index.html`.
 
-Definí la oferta, reposicioné el sitio y lo implementé:
+## Comandos
 
-- **Reposicionamiento**: la oferta principal pasó a ser la auditoría; el producto (TechFitness) quedó como sección al final, con features, demo y acceso.
-- **Estructura de navegación** reencuadrada alrededor del problema del cliente: `problema · consultoría · sobre mí · techfitness · faq`.
-- **Jerarquía de CTAs**: WhatsApp para consultoría en hero, nav, sticky y cierre; el demo solo aparece en su propia sección.
-- **Captura de leads** con formulario a Supabase y fallback a WhatsApp cuando no está configurado.
-- **Metadata social completa**: OG tags, twitter card, canonical y `og-cover.png` 1200×630.
+```bash
+npm install
+npm run dev              # http://localhost:5173
+npm run build            # -> dist/
+npm run preview          # sirve dist/ en http://localhost:4173
+npm run verify:render    # verificación de render con aserciones (ver abajo)
+```
 
-## Stack
+## Verificación de render
 
-HTML estático · Tailwind (CDN) · Supabase JS (captura de leads) · Vercel
+`src/ssr-check.jsx` ejecuta **el árbol real de componentes** por SSR y afirma strings
+esperados por sección: los 3 fixes del rediseño, las anclas del navbar, los contactos
+reales, y que **no** existan los valores falsos que se eliminaron.
 
-## Evidencia
+```bash
+npm run verify:render
+```
 
-| Qué | Dónde |
+Salida esperada: `36 aserciones | fallos: 0 | RENDER OK` y exit code 0.
+
+## Datos
+
+Todo el contenido vive en `src/data/`. Los componentes son sólo presentación.
+
+| Archivo | Contenido |
 |---|---|
-| Metadata social completa y verificable | `<head>` de `index.html`: `og:*`, `twitter:*`, `canonical`, `og:image` 1200×630 |
-| Configuración de despliegue | `vercel.json` |
-| Imágenes y portada social | `img/` |
-| Reposicionamiento de la oferta | historial de commits (C3/C4/C5/C7) |
+| `site.js` | identidad, contacto, nav, pipeline y flujos del hero |
+| `capabilities.js` | capacidades de QA y stack enterprise |
+| `aiDimensions.js` | dimensiones de evaluación de AI + framework |
+| `projects.js` | HERMES y Sports Analytics (metodología, sin métricas inventadas) |
+| `experience.js` | trayectoria, strip de stack, bio y cita |
 
-## Estado
+## Regenerar la portada social
 
-Sitio activo y reposicionado en septiembre de 2026. Observaciones:
+```bash
+"/c/Program Files/Google/Chrome/Application/chrome.exe" --headless=new \
+  --window-size=1200,630 --virtual-time-budget=5000 \
+  --screenshot=public/img/og-qa.png "file:///$PWD/tools/og-cover.html"
+```
 
-- **Tailwind por CDN en producción**: conviene migrar a build.
-- El repo tiene 9 archivos: el contenido vive íntegramente en `index.html`.
-- Convive con un segundo dominio del mismo autor ([lisandrocacciatore.com](https://lisandrocacciatore.com/)), que apunta a la marca técnica. Vale decidir si esa separación es intencional o si conviene unificar la identidad.
+## Deploy
+
+Vercel, con `framework: vite`, `buildCommand: npm run build`, `outputDirectory: dist`
+(fijado en `vercel.json` para que no dependa de la detección automática). Los rewrites a
+`omnicomrade.vercel.app` (`/app`, `/login`, `/signin`) siguen activos: los archivos
+estáticos se resuelven antes.
+
+## Licencia
+
+© 2026 Lisandro Cacciatore. Todos los derechos reservados.

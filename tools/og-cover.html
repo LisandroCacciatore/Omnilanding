@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- Fuente de la portada social del portfolio QA (1200x630).
+     No se despliega: vive en tools/ y sólo se usa para renderizar
+     public/img/og-qa.png. Cambiá el texto acá y volvé a renderizar. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; }
+      body {
+        background: #080B12;
+        color: #E3E9F3;
+        font-family: 'Inter', system-ui, sans-serif;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 64px 72px;
+      }
+      .glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+      }
+      .glow-a { width: 620px; height: 620px; top: -260px; right: -140px; background: rgba(123, 208, 255, 0.16); }
+      .glow-b { width: 520px; height: 520px; bottom: -300px; left: -120px; background: rgba(78, 222, 163, 0.10); }
+      .grid {
+        position: absolute; inset: 0;
+        background-image: linear-gradient(rgba(30, 38, 56, 0.55) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(30, 38, 56, 0.55) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(ellipse 80% 70% at 30% 40%, #000 30%, transparent 100%);
+      }
+      .content { position: relative; display: flex; flex-direction: column; gap: 22px; }
+      .chip {
+        display: inline-flex; align-items: center; gap: 10px;
+        align-self: flex-start;
+        padding: 8px 16px;
+        border: 1px solid #1E2638;
+        border-radius: 999px;
+        background: rgba(13, 17, 26, 0.7);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 15px;
+        letter-spacing: 0.10em;
+        color: #9BB0CE;
+        text-transform: uppercase;
+      }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: #4EDEA3; }
+      h1 {
+        font-size: 54px;
+        line-height: 1.16;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        max-width: 1020px;
+      }
+      h1 em { font-style: normal; color: #7BD0FF; }
+      .sub { font-size: 25px; color: #9BB0CE; font-weight: 600; }
+      .rule { height: 1px; background: #1E2638; margin: 8px 0 4px; }
+      .foot {
+        display: flex; align-items: center; justify-content: space-between;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 18px;
+      }
+      .stack { color: #94A3B8; }
+      .url { color: #7BD0FF; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="content">
+      <span class="chip"><span class="dot"></span>Software Quality / AI Evaluation</span>
+      <h1>I test what systems <em>actually do</em><br />— not what they're supposed to do.</h1>
+      <p class="sub">Lisandro Cacciatore — Senior QA Analyst</p>
+      <div class="rule"></div>
+      <div class="foot">
+        <span class="stack">Software Quality · AI Evaluation · Agentic Systems</span>
+        <span class="url">lcacciatore.com</span>
+      </div>
+    </div>
+  </body>
+</html>
