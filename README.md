@@ -49,6 +49,24 @@ npm run verify:render
 
 Salida esperada: `36 aserciones | fallos: 0 | RENDER OK` y exit code 0.
 
+### Verificar producción
+
+`tools/verificar-prod.py` comprueba que **la URL publicada realmente monte React**
+(no sólo que el HTML responda 200) y que las tres superficies estén vivas:
+
+```bash
+CH="/c/Program Files/Google/Chrome/Application/chrome.exe"
+OUT="$LOCALAPPDATA/Temp/prod"
+mkdir -p "$OUT"
+for p in "home:/" "blog:/blog/" "consultoria:/consultoria/"; do
+  "$CH" --headless=new --disable-gpu --virtual-time-budget=9000 \
+    --dump-dom "https://lcacciatore.com${p#*:}" > "$OUT/prod-${p%%:*}.html" 2>/dev/null
+done
+python tools/verificar-prod.py "$OUT/prod-home.html" "$OUT/prod-blog.html" "$OUT/prod-consultoria.html"
+```
+
+Salida esperada: `comprobaciones: 16 | fallos: 0 | PROD OK`.
+
 ## Datos
 
 Todo el contenido vive en `src/data/`. Los componentes son sólo presentación.
