@@ -2,6 +2,7 @@ import { sportExperience } from '../../data/sport.js';
 import { site } from '../../data/site.js';
 import Icon from '../../components/Icon.jsx';
 import SectionLabel from '../../components/SectionLabel.jsx';
+import ResponsiveImage from '../../components/ResponsiveImage.jsx';
 
 export default function SportsExperience() {
   const e = sportExperience;
@@ -11,10 +12,11 @@ export default function SportsExperience() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
         <div className="lg:col-span-5 relative">
           <div className="rounded-xl overflow-hidden shadow-xl bg-surface-container-high aspect-[0.92]">
-            <img
+            <ResponsiveImage
               src={site.portrait}
               alt={site.name}
               className="w-full h-full object-cover"
+              sizes="(max-width: 1024px) 100vw, 40vw"
             />
           </div>
           <div className="absolute -bottom-6 right-6 bg-surface-container-highest p-space-md rounded-xl shadow-xl max-w-xs hidden sm:block">

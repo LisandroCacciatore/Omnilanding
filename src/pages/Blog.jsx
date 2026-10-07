@@ -2,8 +2,16 @@ import { Link } from 'react-router-dom';
 import { posts } from '../data/blog.js';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function Blog() {
+  useDocumentMeta({
+    title: 'Blog — Lisandro Cacciatore',
+    description: 'Notes on AI quality, software reliability, and sports performance analytics.',
+    image: '/img/og/og-blog.png',
+    path: '/blog',
+  });
+
   return (
     <div className="max-w-[1280px] w-full mx-auto px-gutter py-space-xl flex flex-col gap-space-xl">
       <section className="flex flex-col gap-space-sm max-w-3xl">

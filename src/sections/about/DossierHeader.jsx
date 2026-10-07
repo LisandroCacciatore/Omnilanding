@@ -2,6 +2,7 @@ import { about } from '../../data/about.js';
 import { site } from '../../data/site.js';
 import Icon from '../../components/Icon.jsx';
 import StatusPill from '../../components/StatusPill.jsx';
+import ResponsiveImage from '../../components/ResponsiveImage.jsx';
 
 export default function DossierHeader() {
   return (
@@ -17,10 +18,11 @@ export default function DossierHeader() {
 
         <div className="flex flex-col gap-space-lg my-space-md items-center">
           <div className="relative w-44 h-48 sm:w-48 sm:h-52 rounded-lg overflow-hidden shrink-0 shadow-md bg-surface-container-lowest border border-outline-variant/40">
-            <img
+            <ResponsiveImage
               src={site.portrait}
               alt={site.name}
               className="w-full h-full object-cover object-top"
+              sizes="(max-width: 768px) 176px, 192px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/85 via-surface-container-lowest/20 to-transparent" />
             <div className="absolute bottom-2 left-2 right-2 flex justify-between items-end">

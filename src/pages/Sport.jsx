@@ -6,8 +6,16 @@ import SportsExperience from '../sections/sport/SportsExperience.jsx';
 import CTAButton from '../components/CTAButton.jsx';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function Sport() {
+  useDocumentMeta({
+    title: 'Sports Performance Analytics — Lisandro Cacciatore',
+    description: 'Performance analytics for strength, combat sports, and rugby. Data-driven insights for coaches and athletes.',
+    image: '/img/og/og-sport.png',
+    path: '/sport',
+  });
+
   return (
     <div className="flex flex-col w-full">
       {/* Hero */}

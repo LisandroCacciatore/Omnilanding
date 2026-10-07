@@ -7,3 +7,6 @@ ssr-dist
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# Sharp cache
+.sharp-cache

@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { posts } from '../data/blog.js';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -23,6 +24,13 @@ export default function BlogPost() {
       </div>
     );
   }
+
+  useDocumentMeta({
+    title: `${post.title} — Lisandro Cacciatore`,
+    description: post.excerpt,
+    image: '/img/og/og-blog.png',
+    path: `/blog/${slug}`,
+  });
 
   return (
     <article className="blog-page max-w-3xl w-full mx-auto px-gutter py-space-xl flex flex-col gap-space-lg">
