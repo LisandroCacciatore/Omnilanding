@@ -56,7 +56,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            aria-label="Toggle menu"
+            aria-label="Abrir menú"
             onClick={() => setOpen((v) => !v)}
             className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-outline-variant/40 bg-surface-container-high text-on-surface"
           >

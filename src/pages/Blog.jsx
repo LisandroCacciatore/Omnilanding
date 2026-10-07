@@ -2,18 +2,25 @@ import { Link } from 'react-router-dom';
 import { posts } from '../data/blog.js';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function Blog() {
+  useDocumentMeta({
+    title: 'Blog — Lisandro Cacciatore',
+    description: 'Ensayos sobre calidad de IA, confiabilidad de software y analítica de rendimiento deportivo.',
+    image: '/img/og/og-blog.png',
+    path: '/blog',
+  });
+
   return (
     <div className="max-w-[1280px] w-full mx-auto px-gutter py-space-xl flex flex-col gap-space-xl">
       <section className="flex flex-col gap-space-sm max-w-3xl">
-        <SectionLabel>// Notes & essays</SectionLabel>
+        <SectionLabel>// Notas y ensayos</SectionLabel>
         <h1 className="font-display text-display text-on-surface tracking-tight">
           Blog
         </h1>
         <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-          Short essays at the intersection of AI quality, software reliability, and
-          sports performance analytics. Published as they're written.
+          Ensayos cortos en la intersección de calidad de IA, confiabilidad de software y analítica de rendimiento deportivo. Se publican a medida que se escriben.
         </p>
       </section>
 
@@ -27,7 +34,7 @@ export default function Blog() {
             <div className="flex flex-col gap-space-sm">
               <div className="flex items-center justify-between flex-wrap gap-space-xs">
                 <span className="font-label-technical text-label-technical text-primary">
-                  {new Date(p.date).toLocaleDateString('en-US', {
+                  {new Date(p.date).toLocaleDateString('es-AR', {
                     year: 'numeric',
                     month: 'short',
                     day: 'numeric',
@@ -52,7 +59,7 @@ export default function Blog() {
               </p>
             </div>
             <div className="pt-space-md flex items-center gap-space-xs text-primary font-label-technical text-label-technical uppercase tracking-wider">
-              <span>Read</span>
+              <span>Leer</span>
               <Icon
                 name="arrow_forward"
                 className="text-base group-hover:translate-x-1 transition-transform"

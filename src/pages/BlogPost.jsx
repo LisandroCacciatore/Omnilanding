@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { posts } from '../data/blog.js';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -11,18 +12,25 @@ export default function BlogPost() {
     return (
       <div className="max-w-3xl mx-auto px-gutter py-space-xl text-center">
         <h1 className="font-headline-xl text-headline-xl text-on-surface mb-space-sm">
-          Post not found
+          Post no encontrado
         </h1>
         <Link
           to="/blog"
           className="inline-flex items-center gap-space-xs text-primary font-label-technical text-label-technical uppercase tracking-wider"
         >
           <Icon name="arrow_back" />
-          Back to blog
+          Volver al blog
         </Link>
       </div>
     );
   }
+
+  useDocumentMeta({
+    title: `${post.title} — Lisandro Cacciatore`,
+    description: post.excerpt,
+    image: '/img/og/og-blog.png',
+    path: `/blog/${slug}`,
+  });
 
   return (
     <article className="blog-page max-w-3xl w-full mx-auto px-gutter py-space-xl flex flex-col gap-space-lg">
@@ -31,12 +39,12 @@ export default function BlogPost() {
         className="inline-flex items-center gap-space-xs text-on-surface-variant hover:text-primary font-label-technical text-label-technical uppercase tracking-wider transition-colors w-fit"
       >
         <Icon name="arrow_back" className="text-base" />
-        All posts
+        Todos los posts
       </Link>
 
       <header className="flex flex-col gap-space-sm">
         <SectionLabel>
-          {new Date(post.date).toLocaleDateString('en-US', {
+          {new Date(post.date).toLocaleDateString('es-AR', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
