@@ -1,69 +1,69 @@
 export const about = {
-  badge: 'Available for advisory & QA engagements',
+  badge: 'Disponible para advisory y proyectos de QA',
   headline: 'Lisandro Cacciatore',
-  subheadline: 'Quality & Reliability for AI Systems | Sports Performance Analytics',
-  thesis: 'I work at the intersection of quality, data, and artificial intelligence.',
+  subheadline: 'Calidad y confiabilidad para sistemas de IA | Analítica de rendimiento deportivo',
+  thesis: 'Trabajo en la intersección de calidad, datos e inteligencia artificial.',
   narrative: [
-    { text: 'My career has two tracks that share the exact same foundation: rigor, empirical evidence, and systems thinking.' },
-    { text: 'In software quality and AI evaluation, I help engineering teams validate complex environments — ranging from autonomous LLM agents to distributed enterprise integrations. I design deterministic evaluation frameworks, interrogate APIs, benchmark data pipelines, and verify that mission-critical infrastructure performs predictably at scale.' },
-    { text: 'In sports performance, I leverage 15+ years of practical coaching and competitive mastery across strength training, powerlifting, Brazilian Jiu-Jitsu, MMA, and rugby. Having managed facility training programs and athlete rosters, I build specialized analytics instruments that convert physical metrics into actionable intelligence for coaches.' },
+    { text: 'Mi carrera tiene dos tracks que comparten la misma base: rigor, evidencia empírica y pensamiento sistémico.' },
+    { text: 'En calidad de software y evaluación de IA, ayudo a equipos de ingeniería a validar entornos complejos — desde agentes autónomos basados en LLMs hasta integraciones empresariales distribuidas. Diseño marcos de evaluación deterministas, interrogo APIs, benchmarkeo pipelines de datos y verifico que la infraestructura crítica funcione de forma predecible a escala.' },
+    { text: 'En rendimiento deportivo, aprovecho 15+ años de coaching práctico y experiencia competitiva en entrenamiento de fuerza, powerlifting, Brazilian Jiu-Jitsu, MMA y rugby. Habiendo gestionado programas de entrenamiento y planteles de atletas, construyo instrumentos de analítica especializados que convierten métricas físicas en inteligencia accionable para coaches.' },
   ],
-  quote: 'The common thread: I build systems that help people make better decisions.',
+  quote: 'El hilo conductor: construyo sistemas que ayudan a las personas a tomar mejores decisiones.',
   tracks: [
-    { id: 'qa', label: 'Systems track', value: '6+ yrs QA & AI Eval', sub: 'Autonomous agent rigor', accent: 'primary' },
-    { id: 'sport', label: 'Sports track', value: '15+ yrs Athletic Perf', sub: 'S&C coach / Analytics', accent: 'secondary' },
+    { id: 'qa', label: 'Track sistemas', value: '6+ años QA & Eval IA', sub: 'Rigor en agentes autónomos', accent: 'primary' },
+    { id: 'sport', label: 'Track deportivo', value: '15+ años Rendimiento', sub: 'Coach S&C / Analítica', accent: 'secondary' },
   ],
-  base: { label: 'Operating base', value: 'Buenos Aires, AR' },
+  base: { label: 'Base operativa', value: 'Buenos Aires, AR' },
 };
 
 export const domains = [
   {
     id: 'qa',
-    label: 'Systems & Quality',
-    tag: 'Engineering track',
+    label: 'Sistemas y calidad',
+    tag: 'Track ingeniería',
     accent: 'primary',
-    title: 'AI Agent Validation & Quality Engineering',
-    description: 'Systematic stress testing, API boundary verification, and regression controls for non-deterministic AI pipelines, retrieval systems, and core enterprise products.',
+    title: 'Validación de agentes de IA e ingeniería de calidad',
+    description: 'Testing de estrés sistemático, verificación de límites de APIs y controles de regresión para pipelines de IA no deterministas, sistemas de retrieval y productos empresariales críticos.',
     bullets: [
-      'Automated E2E & API integration frameworks',
-      'LLM output evaluation, groundedness & safety guards',
-      'Data consistency audits & enterprise integration',
+      'Marcos de testing E2E y APIs automatizados',
+      'Evaluación de outputs de LLMs, groundedness y guardrails',
+      'Auditorías de consistencia de datos e integración empresarial',
     ],
-    chart: { type: 'bars', label: 'Evaluation coverage', value: 'Continuous' },
+    chart: { type: 'bars', label: 'Cobertura de evaluación', value: 'Continua' },
   },
   {
     id: 'sport',
-    label: 'Sports Performance',
-    tag: 'Athletic track',
+    label: 'Rendimiento deportivo',
+    tag: 'Track atlético',
     accent: 'secondary',
-    title: 'Strength Science & Telemetry Analytics',
-    description: '15+ years directing strength systems, managing athlete readiness protocols, and developing specialized diagnostic software for high-output physical disciplines.',
+    title: 'Ciencia de la fuerza y analítica de telemetría',
+    description: '15+ años dirigiendo sistemas de fuerza, gestionando protocolos de readiness de atletas y desarrollando software de diagnóstico especializado para disciplinas físicas de alto rendimiento.',
     bullets: [
-      'Strength & conditioning for rugby, BJJ & combat sports',
-      'Sports Performance Analytics platform (in development)',
-      'Keynote: "AI Applied to Sports" & predictive load modeling',
+      'Fuerza y acondicionamiento para rugby, BJJ y deportes de combate',
+      'Plataforma de Analítica de Rendimiento Deportivo (en desarrollo)',
+      'Charla: "IA aplicada al deporte" y modelos predictivos de carga',
     ],
-    chart: { type: 'sparkline', label: 'Applied experience', value: '15+ yrs' },
+    chart: { type: 'sparkline', label: 'Experiencia aplicada', value: '15+ años' },
   },
 ];
 
 export const experience = [
-  { id: 'prisma', category: 'Enterprise systems', role: 'Senior QA', title: 'Prisma', description: 'Architected test matrices, verified transaction reliability, and governed API endpoints for financial and payment processing rails.', tags: ['Integration QA', 'Payment Rails'], accent: 'primary' },
-  { id: 'udla', category: 'Academic & tech', role: 'QA Consultant', title: 'UDLA', description: 'Engineered evaluation standards, automated acceptance routines, and provided structural oversight on academic management platforms.', tags: ['System Auditing', 'Web Services'], accent: 'primary' },
-  { id: 'cyrion', category: 'Infrastructure', role: 'QA Lead', title: 'Cyrion', description: 'Lead QA responsibilities for complex software systems, cross-stack integrations, and client delivery verification protocols.', tags: ['Automated Testing', 'Release Cycles'], accent: 'primary' },
-  { id: 'upex', category: 'Community & mentorship', role: 'Technical Lead', title: 'UPEX', description: 'Trained QA engineers on modern verification pipelines, exploratory methodologies, and high-impact defect lifecycle management.', tags: ['Mentorship', 'QA Operations'], accent: 'primary' },
-  { id: 'testbirds', category: 'Global testing', role: 'Crowdtest Specialist', title: 'Testbirds', description: 'Conducted global device-matrix exploratory sessions, usability telemetry reporting, and edge-case regression validation.', tags: ['Multi-device QA', 'Bug Verification'], accent: 'primary' },
-  { id: 'jockey', category: 'Athletic institution', role: 'Strength & Conditioning', title: 'Jockey Club Rosario', description: 'Coordinated physical training facilities, managed instructors, and directed conditioning programs for rugby and high-performance athletes.', tags: ['Rugby S&C', 'Team Direction'], accent: 'secondary' },
+  { id: 'prisma', category: 'Sistemas empresariales', role: 'QA Senior', title: 'Prisma', description: 'Arquitecturé matrices de testing, verifiqué confiabilidad de transacciones y goberné endpoints de APIs para procesos financieros y de pagos.', tags: ['QA de integración', 'Pagos'], accent: 'primary' },
+  { id: 'udla', category: 'Académico y tech', role: 'Consultor QA', title: 'UDLA', description: 'Diseñé estándares de evaluación, automaticé rutinas de aceptación y proveí supervisión estructural en plataformas de gestión académica.', tags: ['Auditoría de sistemas', 'Web services'], accent: 'primary' },
+  { id: 'cyrion', category: 'Infraestructura', role: 'QA Lead', title: 'Cyrion', description: 'Responsabilidades de liderazgo QA para sistemas de software complejos, integraciones cross-stack y protocolos de verificación de entregas a clientes.', tags: ['Testing automatizado', 'Ciclos de release'], accent: 'primary' },
+  { id: 'upex', category: 'Comunidad y mentoría', role: 'Lead Técnico', title: 'UPEX', description: 'Formé ingenieros de QA en pipelines modernos de verificación, metodologías exploratorias y gestión del ciclo de vida de defectos.', tags: ['Mentoría', 'Operaciones QA'], accent: 'primary' },
+  { id: 'testbirds', category: 'Testing global', role: 'Especialista Crowdtest', title: 'Testbirds', description: 'Conduje sesiones exploratorias en matrices globales de dispositivos, reportes de telemetría de usabilidad y validación de regresión de casos límite.', tags: ['QA multi-dispositivo', 'Verificación de bugs'], accent: 'primary' },
+  { id: 'jockey', category: 'Institución deportiva', role: 'Fuerza y Acondicionamiento', title: 'Jockey Club Rosario', description: 'Coordiné instalaciones de entrenamiento físico, gestioné instructores y dirigí programas de acondicionamiento para rugby y atletas de alto rendimiento.', tags: ['Rugby S&C', 'Dirección de equipos'], accent: 'secondary' },
 ];
 
 export const certifications = [
-  { id: 'sf-ai', issuer: 'Salesforce', icon: 'psychology', accent: 'primary', title: 'Salesforce AI Associate', description: 'AI Ethics, CRM Grounding & Data Governance' },
-  { id: 'sf-assoc', issuer: 'Salesforce', icon: 'cloud_done', accent: 'primary', title: 'Salesforce Associate', description: 'Architecture, Data Models & User Security' },
-  { id: 'gcp-dl', issuer: 'Google Cloud', icon: 'hub', accent: 'secondary', title: 'Cloud Digital Leader', description: 'Cloud Architecture, Data Transformation & Security' },
-  { id: 'g-ai', issuer: 'Google', icon: 'memory', accent: 'secondary', title: 'Google AI Essentials', description: 'Generative Tools, Prompt Engineering & Operational QA' },
+  { id: 'sf-ai', issuer: 'Salesforce', icon: 'psychology', accent: 'primary', title: 'Salesforce AI Associate', description: 'Ética de IA, grounding de CRM y gobernanza de datos' },
+  { id: 'sf-assoc', issuer: 'Salesforce', icon: 'cloud_done', accent: 'primary', title: 'Salesforce Associate', description: 'Arquitectura, modelos de datos y seguridad de usuarios' },
+  { id: 'gcp-dl', issuer: 'Google Cloud', icon: 'hub', accent: 'secondary', title: 'Cloud Digital Leader', description: 'Arquitectura cloud, transformación de datos y seguridad' },
+  { id: 'g-ai', issuer: 'Google', icon: 'memory', accent: 'secondary', title: 'Google AI Essentials', description: 'Herramientas generativas, prompt engineering y QA operativa' },
 ];
 
 export const languages = [
-  { id: 'es', name: 'Spanish', level: 'Native', note: 'Full professional & cultural proficiency', progress: 100, accent: 'primary' },
-  { id: 'en', name: 'English', level: 'B2 Upper Intermediate', note: 'Technical architectural writing & executive delivery', progress: 78, accent: 'secondary' },
+  { id: 'es', name: 'Español', level: 'Nativo', note: 'Competencia profesional y cultural completa', progress: 100, accent: 'primary' },
+  { id: 'en', name: 'Inglés', level: 'B2 Intermedio alto', note: 'Escritura técnica y presentaciones ejecutivas', progress: 78, accent: 'secondary' },
 ];

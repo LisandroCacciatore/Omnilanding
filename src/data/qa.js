@@ -1,120 +1,169 @@
+// ============================================================
+// EDITAR ACÁ LOS LINKS DE CONVERSIÓN
+// ============================================================
+const CALCOM_URL = 'https://cal.com/lcacciatore/30min'; // ← tu link real
+const CONTACT_EMAIL = 'hello@lcacciatore.com';           // ← tu email real
+// ============================================================
+
 export const qaHero = {
-  badge: 'Systems quality · AI evaluation architecture',
-  headline: 'AI Quality & Evaluation',
-  subheadline: 'Ensuring AI systems, agents, and complex software work as expected.',
-  lead: 'Evaluation frameworks. API validation. Data integrity. Reliability engineering for high-assurance enterprise systems.',
-  ctas: [
-    { label: 'View Services', to: '#services', icon: 'arrow_forward' },
-    { label: 'See Case Studies', to: '#case-studies', icon: 'arrow_downward', accent: 'secondary' },
+  badge: 'Evaluación de IA · Confiabilidad de sistemas',
+  headline: 'Tu producto de IA funciona en el demo. ¿Y en producción un martes a las 3 AM?',
+  subheadline:
+    'Diseño marcos de evaluación, validación de APIs y controles de confiabilidad para sistemas AI-first que no pueden fallar. Agentes, LLMs y las integraciones empresariales alrededor de ellos.',
+  primaryCta: { label: 'Agendar diagnóstico de 30 min', href: CALCOM_URL, icon: 'arrow_forward' },
+  secondaryCta: { label: 'Ver cómo trabajo', href: '#process', icon: 'arrow_downward', accent: 'secondary' },
+  highlights: [
+    { label: '6+ años', sub: 'QA & evaluación de IA' },
+    { label: 'Enterprise', sub: 'Agentes · ERP · CRM' },
+    { label: 'Remoto', sub: 'LATAM · US · Europa' },
   ],
-  panel: {
-    title: 'Reliability posture',
-    status: 'Available',
-    metrics: [
-      { label: 'Methodological framework', value: 'SDD active', note: 'Formal behavioral boundaries mapped before autonomous execution' },
-      { label: 'Shift-left practice', value: 'Design-time validation', note: 'Defect discovery moved upstream into the requirements cycle' },
-      { label: 'Enterprise parity', value: 'ERP & pipelines', note: 'Cross-system data consistency across connected platforms' },
-    ],
-    footer: ['Deterministic guardrails', 'Zero hallucination tolerance'],
-  },
+};
+
+export const qaProblem = {
+  label: '// Lo que suele pasar',
+  title: 'Tres síntomas que indican que tu sistema de IA no tiene evaluación real.',
+  items: [
+    {
+      title: 'Funciona, pero no sabés por qué.',
+      description:
+        'La calidad del output varía de una corrida a otra y no hay una línea base que diga cómo se ve "bien".',
+    },
+    {
+      title: 'Los bugs aparecen en producción, no en los tests.',
+      description:
+        'Tu suite valida software, no comportamiento de LLMs. Cada deploy es una pequeña apuesta.',
+    },
+    {
+      title: 'Nadie puede explicar un fallo en el post-mortem.',
+      description:
+        'Sin traza del prompt, del tool call o del camino de decisión. El agente hizo algo y nadie sabe qué.',
+    },
+  ],
 };
 
 export const qaServices = {
-  label: '01 // Core competencies',
-  title: 'What I Offer',
-  intro: 'End-to-end evaluation architecture, deterministic test harnesses, and structural resilience for agentic stacks and enterprise data flows.',
-  items: [
-    { id: 'agent-eval', icon: 'neurology', tag: 'Agentic architecture', title: 'AI Agent Evaluation', description: 'Designing evaluation criteria for agentic systems: task delegation, workflow reliability, expected outcomes, edge cases, and failure modes.', footer: 'Multi-turn agent auditing' },
-    { id: 'llm-val', icon: 'psychology', tag: 'Inference quality', title: 'LLM Workflow Validation', description: 'Testing LLM-based applications for accuracy, consistency, bias, and production readiness. Structured evaluation of prompts, outputs, and integrations.', footer: 'RAG & context verification' },
-    { id: 'api-int', icon: 'hub', tag: 'System integrity', title: 'API & Integration Testing', description: 'Validating REST and SOAP APIs, data flows, and system integrations. Ensuring data accuracy and integrity across connected systems.', footer: 'Contract & schema assurances' },
-    { id: 'data-q', icon: 'database', tag: 'Data pipelines', title: 'Data Quality & Validation', description: 'SQL, MySQL, MongoDB, Elasticsearch. Validating data pipelines, transformations, and business logic across heterogeneous architectures.', footer: 'ETL anomaly detection' },
-    { id: 'strategy', icon: 'rule', tag: 'Organizational rigor', title: 'Quality Strategy & Shift Left', description: 'Test strategy design, requirements validation, acceptance criteria, defect lifecycle management, and systematic process improvement.', footer: 'Early discovery architecture' },
-    { id: 'sf-testing', icon: 'cloud_done', tag: 'Enterprise CRM', title: 'Salesforce Testing', description: 'Functional, regression, integration, and data validation across complex Salesforce environments, apex triggers, and custom flows.', footer: 'Multi-sandbox regression suites' },
+  label: '// Qué hago',
+  title: 'Dos formas de trabajar, según dónde estés.',
+  offers: [
+    {
+      tag: 'Gratis',
+      title: 'Llamada de diagnóstico',
+      description:
+        'Una conversación enfocada de 30 minutos sobre tu sistema de IA: qué hace, dónde se rompe, y si la evaluación vale la pena invertirla ahora. Sin pitch.',
+      meta: ['30 minutos', 'Videollamada', 'Resumen escrito incluido'],
+      cta: { label: 'Agendar la llamada', href: CALCOM_URL },
+    },
+    {
+      tag: 'A medida',
+      title: 'Taller de Shift-Left Testing',
+      description:
+        'Un taller práctico con tu equipo. Tomamos un flujo real — un agente, una feature con LLM, una integración crítica — y construimos el harness de evaluación juntos.',
+      meta: ['1–3 días', 'Remoto o presencial', 'El harness es tuyo al terminar'],
+      cta: { label: 'Coordinar taller', href: CALCOM_URL },
+    },
+    {
+      tag: 'Retainer',
+      title: 'Partner de evaluación embebido',
+      description:
+        'Arquitectura de evaluación continua para equipos que shippean IA de forma constante. Me sumo a tus rituales, reviso diseños y mantengo el harness honesto a medida que el producto evoluciona.',
+      meta: ['3–6 meses', 'Cadencia semanal', 'Acceso directo a tu equipo'],
+      cta: { label: 'Hablar de retainer', href: CALCOM_URL },
+    },
   ],
 };
 
 export const qaCaseStudies = {
-  label: '02 // Evidence in action',
-  title: 'Case Studies',
-  intro: 'Production-grade outcomes across autonomous agents, multi-record ERP re-architectures, and high-stakes enterprise systems.',
-  featured: {
-    badge: 'Flagship platform',
-    ref: '01 // Autonomous evaluation',
-    title: 'Hermes — AI Agent & Automation Platform',
-    description: 'Designing evaluation criteria for agentic workflows, task orchestration, and structured AI behavior. Applying Specification-Driven Development (SDD) to define expected behavior before implementation.',
-    specs: [
-      { label: 'State verification', value: 'Deterministic', note: 'Multi-step rollback safety' },
-      { label: 'Validation layer', value: 'Pre-execution', note: 'Structured SDD test harnesses' },
-    ],
-    pipeline: {
-      title: 'SDD Execution & Telemetry Architecture',
-      status: 'Audited pipeline',
-      steps: [
-        { n: 1, title: 'Specification (SDD)', subtitle: 'Formal contracts, inputs & guardrails', icon: 'lock', accent: 'primary' },
-        { n: 2, title: 'Orchestrated execution', subtitle: 'Agentic reasoning & sub-task dispatch', icon: 'sync_alt', accent: 'primary' },
-        { n: 3, title: 'Evaluation & reversibility', subtitle: 'Output scoring, latency & rollback', icon: 'done_all', accent: 'tertiary' },
-      ],
-      footer: [
-        { label: 'Reversibility:', value: 'State-reversible by design' },
-        { label: 'Latency contract:', value: 'Defined per workflow' },
-      ],
+  label: '// Evidencia',
+  title: 'Cómo se ve esto en la práctica.',
+  items: [
+    {
+      id: 'hermes',
+      tag: 'Plataforma insignia',
+      title: 'Hermes — Plataforma de agentes de IA y automatización',
+      description:
+        'Diseñé los criterios de evaluación para flujos agénticos y apliqué Specification-Driven Development para definir comportamiento antes de la implementación. Reversibilidad y rollback pasaron a ser de primera clase, no un afterthought.',
+      tags: ['Evaluación de agentes', 'SDD', 'Reversibilidad'],
     },
-  },
-  mosaic: [
     {
       id: 'prisma',
-      ref: '02 // Process reengineering',
-      icon: 'trending_down',
-      title: 'Salesforce Process Reengineering (Prisma Project)',
-      description: 'Designed and executed test strategies for business-critical processes. Applied Shift-Left practices to catch defects earlier in the lifecycle.',
-      metric: { label: 'Approach', value: 'Shift Left' },
-      footnote: 'Earlier defect discovery, cleaner production releases',
-      accent: 'primary',
+      tag: 'Enterprise',
+      title: 'Prisma — Reingeniería de procesos Salesforce',
+      description:
+        'Rediseñé la estrategia de testing para procesos críticos del negocio. Prácticas Shift-Left aplicadas a lo largo del ciclo de requisitos.',
+      tags: ['Shift-Left', 'Rediseño de procesos'],
     },
     {
       id: 'udla',
-      ref: '03 // Enterprise ERP parity',
-      icon: 'sync',
-      title: 'Salesforce Implementations (UDLA Project)',
-      description: 'Testing strategies for complex integrations. REST and SOAP API validation. Data parity and consistency across legacy ERP systems.',
-      metric: { label: 'Data parity', value: 'ERP-aligned' },
-      footnote: 'Cross-system consistency verified end-to-end',
-      accent: 'secondary',
+      tag: 'Integración',
+      title: 'UDLA — Integración de ERP empresarial',
+      description:
+        'Validación de APIs REST y SOAP. Paridad de datos verificada de punta a punta entre sistemas legados.',
+      tags: ['Testing de APIs', 'Paridad de datos'],
+    },
+  ],
+};
+
+export const qaProcess = {
+  label: '// Cómo trabajamos juntos',
+  title: 'Sin sorpresas. Cuatro pasos.',
+  steps: [
+    {
+      title: 'Llamada de diagnóstico',
+      description: 'Describís el sistema. Yo hago las preguntas que haría un QA lead. Decidimos si hay encaje.',
+      meta: '30 min · Gratis',
     },
     {
-      id: 'looker',
-      ref: '04 // Telemetry & decision',
-      icon: 'dashboard',
-      title: 'Quality Dashboards (Looker)',
-      description: 'Introduced interactive telemetry dashboards to support quality monitoring and team decision-making in real time.',
-      metric: { label: 'Visibility', value: 'Real-time' },
-      footnote: 'Dynamic defect lifecycle insights',
-      accent: 'tertiary',
+      title: 'Dirección por escrito',
+      description: 'Un documento corto: qué veo, qué haría primero y cuánto cuesta. Sin slide deck.',
+      meta: 'En 48 h',
+    },
+    {
+      title: 'Ejecución',
+      description: 'Se ejecuta contra un scope definido. Check-ins semanales. Entregables en tu repo, no en un Notion.',
+      meta: 'Auditoría · Taller · Retainer',
+    },
+    {
+      title: 'Handoff',
+      description: 'Tu equipo corre el harness sin mí. Ese es el objetivo. No la dependencia.',
+      meta: 'Entregables listos',
     },
   ],
 };
 
-export const qaTechStack = {
-  label: '03 // Tooling ecosystem',
-  title: 'Tools & Technologies',
-  intro: 'A battle-tested stack combining modern AI evaluation harnesses with robust enterprise testing infrastructure.',
-  categories: [
-    { id: 'ai', icon: 'smart_toy', title: 'AI & Evaluation', accent: 'primary', items: ['LLM evaluation', 'Agent evaluation', 'SDD frameworks', 'MCP workflows'] },
-    { id: 'testing', icon: 'terminal', title: 'Testing', accent: 'secondary', items: ['Playwright', 'Cypress', 'Katalon Studio', 'Postman', 'Insomnia'] },
-    { id: 'data', icon: 'dataset', title: 'Data', accent: 'tertiary', items: ['SQL & MySQL', 'SOQL (Salesforce)', 'MongoDB', 'Elasticsearch'] },
-    { id: 'platforms', icon: 'developer_board', title: 'Platforms', accent: 'primary', items: ['Salesforce Core', 'JIRA', 'Xray Test Mgmt', 'Looker'] },
-    { id: 'methods', icon: 'schema', title: 'Methodologies', accent: 'secondary', items: ['Shift Left Testing', 'BDD Frameworks', 'Scrum Agile', 'Kanban Flow'] },
+export const qaFaq = {
+  label: '// Preguntas que vale la pena hacerse',
+  title: 'FAQ',
+  items: [
+    {
+      question: '¿Trabajás con equipos fuera de Argentina?',
+      answer: 'Sí. Remoto. He entregado para equipos en LATAM, US y Europa.',
+    },
+    {
+      question: '¿Cuál es tu stack?',
+      answer:
+        'Playwright, Cypress, Postman, JIRA, Xray, SQL, MongoDB, Looker y marcos de evaluación de LLMs y agentes. Con el stack que ya use tu equipo, me adapto.',
+    },
+    {
+      question: '¿Qué tan rápido podés empezar?',
+      answer:
+        'Las llamadas de diagnóstico suelen ser dentro de una semana. Los talleres se agendan a 2–3 semanas.',
+    },
+    {
+      question: '¿Firmás NDAs?',
+      answer:
+        'Sí, estándar. También puedo trabajar bajo tu acuerdo de proveedor existente.',
+    },
+    {
+      question: '¿Y si mi equipo no está listo para un marco de evaluación completo?',
+      answer:
+        'Está bien. Muchas veces la llamada de diagnóstico sola destraba más que una auditoría completa. Hacemos el scope según tu madurez real, no según un checklist.',
+    },
   ],
 };
 
-export const qaCrossLink = {
-  text: 'Also working on Sports Performance Analytics',
-  cta: { label: 'Explore Sports Analytics Portal', to: '/sport' },
-  contact: {
-    label: 'Get in touch',
-    title: 'Need reliable AI or software quality?',
-    description: 'I help teams design evaluation frameworks, validate AI systems, and ship with confidence.',
-    cta: { label: 'Contact me', to: '/contact' },
-    note: 'Estimated response within 24 business hours',
-  },
+export const qaFinalCta = {
+  headline: 'Si no se puede medir, no se puede confiar.',
+  subhead: '30 minutos. Sin pitch. Te vas con una dirección.',
+  cta: { label: 'Agendar tu llamada de diagnóstico', href: CALCOM_URL },
+  email: CONTACT_EMAIL,
 };

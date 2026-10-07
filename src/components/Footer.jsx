@@ -26,7 +26,7 @@ export default function Footer() {
 
           <div className="md:col-span-3 flex flex-col gap-space-sm">
             <span className="font-label-technical text-label-technical text-on-surface-variant uppercase tracking-wider mb-space-xs">
-              Navigate
+              Navegación
             </span>
             <nav className="flex flex-col gap-space-xs">
               {site.nav.map((item) => (
@@ -43,7 +43,7 @@ export default function Footer() {
 
           <div className="md:col-span-3 flex flex-col gap-space-sm">
             <span className="font-label-technical text-label-technical text-on-surface-variant uppercase tracking-wider mb-space-xs">
-              Network
+              Redes
             </span>
             <ul className="flex flex-col gap-space-xs font-body-sm text-body-sm">
               <li>
@@ -85,7 +85,7 @@ export default function Footer() {
                   className="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors"
                 >
                   <Icon name="mail" className="text-sm text-primary" />
-                  <span>Direct contact</span>
+                  <span>Contacto directo</span>
                 </Link>
               </li>
             </ul>
@@ -94,7 +94,7 @@ export default function Footer() {
 
         <div className="pt-space-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md font-label-technical text-label-technical text-on-surface-variant border-t border-outline-variant/20">
           <div>
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+            © {new Date().getFullYear()} {site.name}. Todos los derechos reservados.
           </div>
           <div className="flex items-center gap-space-md">
             <span>{site.location}</span>

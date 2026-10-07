@@ -2,8 +2,16 @@ import { contact } from '../data/contact.js';
 import { site } from '../data/site.js';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function Contact() {
+  useDocumentMeta({
+    title: 'Contacto — Lisandro Cacciatore',
+    description: 'Contactá para engagements de calidad de IA, consultoría de testing de software o analítica de rendimiento deportivo.',
+    image: '/img/og/og-home.png',
+    path: '/contact',
+  });
+
   return (
     <div className="max-w-[1280px] w-full mx-auto px-gutter py-space-xl flex flex-col gap-space-xl">
       <section className="bg-surface-container rounded-xl p-space-lg md:p-space-xl shadow-xl border border-outline-variant/30 relative overflow-hidden">
@@ -55,9 +63,9 @@ export default function Contact() {
       <section className="bg-surface-container rounded-xl p-space-lg shadow-xl border border-outline-variant/40">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
           <div className="flex flex-col gap-space-sm">
-            <SectionLabel accent="secondary">Direct email</SectionLabel>
+            <SectionLabel accent="secondary">Email directo</SectionLabel>
             <p className="font-body-md text-body-md text-on-surface-variant">
-              Prefer email? Reach out and I'll get back to you within one business day.
+              ¿Preferís email? Escribime y te respondo dentro de un día hábil.
             </p>
             <a
               href="mailto:hello@lcacciatore.com"
@@ -69,7 +77,7 @@ export default function Contact() {
           </div>
 
           <div className="flex flex-col gap-space-sm">
-            <SectionLabel accent="secondary">Based in</SectionLabel>
+            <SectionLabel accent="secondary">Ubicación</SectionLabel>
             <p className="font-headline-md text-headline-md text-on-surface">
               {site.location}
             </p>

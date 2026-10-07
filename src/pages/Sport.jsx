@@ -6,8 +6,16 @@ import SportsExperience from '../sections/sport/SportsExperience.jsx';
 import CTAButton from '../components/CTAButton.jsx';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function Sport() {
+  useDocumentMeta({
+    title: 'Analítica de Rendimiento Deportivo — Lisandro Cacciatore',
+    description: 'Analítica de rendimiento para fuerza, deportes de combate y rugby. Insights basados en datos para coaches y atletas.',
+    image: '/img/og/og-sport.png',
+    path: '/sport',
+  });
+
   return (
     <div className="flex flex-col w-full">
       {/* Hero */}
@@ -171,13 +179,13 @@ export default function Sport() {
                     <circle cx="320" cy="20" fill="#e0c29f" r="4" />
                   </svg>
                   <div className="flex justify-between font-label-code-sm text-label-code-sm text-outline mt-space-xs">
-                    <span>Mon</span>
-                    <span>Tue</span>
-                    <span>Wed</span>
-                    <span>Thu</span>
-                    <span>Fri</span>
-                    <span>Sat</span>
-                    <span>Sun</span>
+                    <span>Lun</span>
+                    <span>Mar</span>
+                    <span>Mié</span>
+                    <span>Jue</span>
+                    <span>Vie</span>
+                    <span>Sáb</span>
+                    <span>Dom</span>
                   </div>
                 </div>
 
@@ -238,16 +246,14 @@ export default function Sport() {
           <div className="inline-flex items-center gap-space-xs mb-space-sm bg-surface-container px-space-md py-space-xs rounded-xl">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="font-label-code-sm text-label-code-sm text-secondary uppercase tracking-wider">
-              Community & updates
+              Comunidad y novedades
             </span>
           </div>
           <h2 className="font-display-xl-mobile md:font-headline-lg text-display-xl-mobile md:text-headline-lg text-on-surface font-semibold tracking-tight mb-space-sm">
-            Follow the work in progress.
+            Seguí el trabajo en progreso.
           </h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-space-lg">
-            Sports Performance Analytics is under active development. Follow along for
-            training content and product updates — or reach out directly if you want to
-            collaborate.
+            Sports Performance Analytics está en desarrollo activo. Seguí para contenido de entrenamiento y actualizaciones de producto — o escribime si querés colaborar.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md">
@@ -258,7 +264,7 @@ export default function Sport() {
               className="inline-flex items-center gap-space-sm bg-surface-container-high text-on-surface font-body-md font-medium px-space-lg py-space-sm rounded-lg hover:bg-surface-bright transition-all border border-outline-variant/40"
             >
               <Icon name="fitness_center" className="text-secondary" />
-              <span>Follow {sportCrossLink.community.handle}</span>
+              <span>Seguir {sportCrossLink.community.handle}</span>
             </a>
             <CTAButton
               to={sportCrossLink.contact.cta.to}
@@ -278,7 +284,7 @@ export default function Sport() {
             </div>
             <div>
               <span className="font-label-code-sm text-label-code-sm text-outline uppercase block">
-                Dual discipline synergy
+                Sinergia entre disciplinas
               </span>
               <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">
                 {sportCrossLink.text}
