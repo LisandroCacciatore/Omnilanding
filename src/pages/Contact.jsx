@@ -2,8 +2,16 @@ import { contact } from '../data/contact.js';
 import { site } from '../data/site.js';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function Contact() {
+  useDocumentMeta({
+    title: 'Contact — Lisandro Cacciatore',
+    description: 'Get in touch for AI quality engagements, software testing consulting, or sports performance analytics.',
+    image: '/img/og/og-home.png',
+    path: '/contact',
+  });
+
   return (
     <div className="max-w-[1280px] w-full mx-auto px-gutter py-space-xl flex flex-col gap-space-xl">
       <section className="bg-surface-container rounded-xl p-space-lg md:p-space-xl shadow-xl border border-outline-variant/30 relative overflow-hidden">

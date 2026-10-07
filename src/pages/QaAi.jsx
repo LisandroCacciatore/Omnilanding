@@ -5,8 +5,16 @@ import TechStack from '../sections/qa/TechStack.jsx';
 import CTAButton from '../components/CTAButton.jsx';
 import Icon from '../components/Icon.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function QaAi() {
+  useDocumentMeta({
+    title: 'AI Quality & Evaluation — Lisandro Cacciatore',
+    description: 'AI agent evaluation, LLM workflow validation, API testing, data quality, and Salesforce testing.',
+    image: '/img/og/og-qa.png',
+    path: '/qa-ai',
+  });
+
   return (
     <div className="flex flex-col w-full">
       <section className="max-w-[1280px] mx-auto px-gutter pt-space-xl pb-space-lg w-full">

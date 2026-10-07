@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px;
+      height: 630px;
+      background: #141312;
+      font-family: 'Inter', sans-serif;
+      color: #e6e2df;
+      overflow: hidden;
+      position: relative;
+    }
+    .glow-1 {
+      position: absolute;
+      top: -200px; left: -200px;
+      width: 600px; height: 600px;
+      background: rgba(242, 190, 140, 0.10);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+    .glow-2 {
+      position: absolute;
+      bottom: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: rgba(224, 194, 159, 0.08);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 80px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .dot {
+      width: 12px; height: 12px;
+      background: #f2be8c;
+      border-radius: 2px;
+    }
+    .name {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #f2be8c;
+      margin-bottom: 24px;
+    }
+    .eyebrow.secondary { color: #e0c29f; }
+    .title {
+      font-size: 72px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+    }
+    .title .accent { color: #f2be8c; }
+    .title .accent-2 { color: #e0c29f; }
+    .subtitle {
+      font-size: 28px;
+      color: #d4c4b7;
+      margin-top: 20px;
+      max-width: 800px;
+      line-height: 1.3;
+    }
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: #9c8e82;
+      text-transform: uppercase;
+    }
+    .bottom .brand { color: #f2be8c; }
+  </style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="container">
+    <div class="top">
+      <div class="dot"></div>
+      <div class="name">Lisandro Cacciatore</div>
+    </div>
+    <div>
+      <div class="eyebrow">Systems quality · AI evaluation</div>
+      <div class="title">
+        <span class="accent">AI Quality</span><br />& Evaluation
+      </div>
+      <div class="subtitle">Evaluation frameworks. API validation. Data integrity. Reliability engineering.</div>
+    </div>
+    <div class="bottom">
+      <span>lcacciatore.com</span>
+      <span class="brand">Quality & Reliability · Sports Performance</span>
+    </div>
+  </div>
+</body>
+</html>

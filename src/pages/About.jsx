@@ -4,8 +4,16 @@ import ExperienceGrid from '../sections/about/ExperienceGrid.jsx';
 import Credentials from '../sections/about/Credentials.jsx';
 import CTAButton from '../components/CTAButton.jsx';
 import SectionLabel from '../components/SectionLabel.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 export default function About() {
+  useDocumentMeta({
+    title: 'About — Lisandro Cacciatore',
+    description: 'Hybrid professional: software quality, AI evaluation, and sports performance.',
+    image: '/img/og/og-about.png',
+    path: '/about',
+  });
+
   return (
     <div className="max-w-[1280px] w-full mx-auto px-gutter py-space-xl flex flex-col gap-space-xl">
       <DossierHeader />

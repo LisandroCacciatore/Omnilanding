@@ -3,6 +3,7 @@ import { aboutPreview } from '../../data/home.js';
 import { site } from '../../data/site.js';
 import Icon from '../../components/Icon.jsx';
 import SectionLabel from '../../components/SectionLabel.jsx';
+import ResponsiveImage from '../../components/ResponsiveImage.jsx';
 
 export default function AboutPreview() {
   return (
@@ -11,10 +12,11 @@ export default function AboutPreview() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
           <div className="lg:col-span-4 flex flex-col items-center sm:items-start gap-space-md">
             <div className="relative w-48 h-56 md:w-60 md:h-72 rounded-lg overflow-hidden bg-surface-container-lowest shadow-lg border border-outline-variant/40">
-              <img
+              <ResponsiveImage
                 src={site.portrait}
                 alt={site.name}
                 className="w-full h-full object-cover object-top"
+                sizes="(max-width: 768px) 192px, 240px"
               />
             </div>
 
