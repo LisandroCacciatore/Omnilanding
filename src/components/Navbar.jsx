@@ -1,105 +1,92 @@
+import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
-import { nav, site } from '../data/site.js';
-import useScrollSpy from '../hooks/useScrollSpy.js';
+import { site } from '../data/site.js';
+import Icon from './Icon.jsx';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const active = useScrollSpy(nav.map((n) => n.to));
 
   return (
-    <header className="sticky top-0 z-50 bg-[#080B12]/90 backdrop-blur-md border-b border-outline-variant">
-      <div className="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-        <a
-          href="#"
-          className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2.5 text-on-surface hover:text-primary transition-colors rounded py-1"
+    <header className="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.35)]">
+      <div className="h-20 max-w-[1280px] mx-auto px-gutter flex items-center justify-between gap-space-md">
+        <Link
+          to="/"
+          className="flex flex-col group"
+          onClick={() => setOpen(false)}
         >
-          <span className="font-mono text-[13px] sm:text-[14px] font-semibold tracking-wider">
-            {site.name}
+          <div className="flex items-center gap-space-sm">
+            <span className="w-2 h-2 rounded bg-primary" />
+            <span className="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-primary transition-colors">
+              {site.name}
+            </span>
+          </div>
+          <span className="hidden sm:block text-body-sm text-on-surface-variant">
+            {site.tagline}
           </span>
-          <span className="hidden sm:inline text-outline/60 text-xs">//</span>
-          <span className="font-mono text-[11px] sm:text-[12px] text-secondary font-medium tracking-wide">
-            {site.role}
-          </span>
-        </a>
+        </Link>
 
-        <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-7 text-[13px] font-mono">
-          {nav.map((item) => {
-            const isActive = active === item.to;
-            return (
-              <a
-                key={item.to}
-                href={item.to}
-                className={`transition-colors py-1 relative ${
+        <nav className="hidden lg:flex items-center gap-space-xs p-space-xs bg-surface-container-lowest rounded-lg border border-outline-variant/30">
+          {site.nav.map((item) => (
+            <NavLink
+              key={item.id}
+              to={item.to}
+              end={item.to === '/'}
+              className={({ isActive }) =>
+                `px-space-md py-space-xs font-medium text-body-sm rounded transition-colors ${
                   isActive
-                    ? 'text-primary'
-                    : 'text-on-surface-variant hover:text-primary'
-                }`}
-              >
-                {item.label}
-                {isActive && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-primary" />
-                )}
-              </a>
-            );
-          })}
+                    ? 'text-on-surface bg-surface-container-high'
+                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
+                }`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-3 sm:gap-4">
-          <div className="hidden md:inline-flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container-low border border-outline-variant text-[11px] font-mono text-secondary">
-            <span className="w-1.5 h-1.5 rounded-full bg-status-green animate-pulse" />
-            <span>{site.statusChip}</span>
-          </div>
-
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-surface-container border border-primary/50 text-primary hover:bg-primary/10 hover:border-primary font-mono text-xs font-semibold tracking-wide transition-all shadow-sm"
+        <div className="flex items-center gap-space-md">
+          <Link
+            to={site.cta.to}
+            className="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-body-sm font-medium border border-outline-variant/40 transition-colors"
           >
-            <span className="material-symbols-outlined text-[15px]">send</span>
-            <span>{site.ctaLabel}</span>
-          </a>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span>{site.cta.label}</span>
+            <Icon name="arrow_forward" className="text-base text-primary" />
+          </Link>
 
           <button
             type="button"
-            aria-label="Toggle navigation menu"
-            aria-expanded={open}
+            aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
-            className="xl:hidden p-1.5 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container border border-outline-variant"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-outline-variant/40 bg-surface-container-high text-on-surface"
           >
-            <span className="material-symbols-outlined text-[22px] block">
-              {open ? 'close' : 'menu'}
-            </span>
+            <Icon name={open ? 'close' : 'menu'} />
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="xl:hidden bg-[#080B12]/98 border-b border-outline-variant px-4 pt-3 pb-6 space-y-2 backdrop-blur-xl">
-          <div className="font-mono text-[11px] text-outline uppercase tracking-wider px-3 pb-1 border-b border-outline-variant">
-            Navigation Index
+        <nav className="lg:hidden border-t border-outline-variant/30 bg-surface-container-lowest">
+          <div className="max-w-[1280px] mx-auto px-gutter py-space-md flex flex-col gap-space-xs">
+            {site.nav.map((item) => (
+              <NavLink
+                key={item.id}
+                to={item.to}
+                end={item.to === '/'}
+                onClick={() => setOpen(false)}
+                className={({ isActive }) =>
+                  `px-space-md py-space-sm rounded text-body-md ${
+                    isActive
+                      ? 'text-on-surface bg-surface-container-high font-medium'
+                      : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </div>
-          {nav.map((item) => (
-            <a
-              key={item.to}
-              href={item.to}
-              onClick={() => setOpen(false)}
-              className="block px-3 py-2 rounded text-sm text-on-surface-variant hover:text-primary hover:bg-surface-container font-mono"
-            >
-              {item.label}
-            </a>
-          ))}
-          <div className="pt-3 px-3">
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded bg-primary text-on-primary-container font-mono text-xs font-semibold"
-            >
-              <span>{site.ctaLabel}</span>
-              <span className="material-symbols-outlined text-[16px]">
-                arrow_forward
-              </span>
-            </a>
-          </div>
-        </div>
+        </nav>
       )}
     </header>
   );

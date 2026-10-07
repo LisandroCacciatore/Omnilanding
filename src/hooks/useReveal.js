@@ -1,34 +1,24 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-/**
- * Agrega la clase `revealed` a los elementos con la clase `timeline-item`
- * cuando entran al viewport. Se aplica por contenedor.
- */
-export default function useReveal() {
+// Simple reveal-on-scroll. Respects prefers-reduced-motion via CSS.
+export default function useReveal({ threshold = 0.15 } = {}) {
   const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const root = ref.current;
-    if (!root) return;
-
-    const items = root.querySelectorAll('.timeline-item');
-    if (!items.length) return;
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('revealed');
-            obs.unobserve(e.target);
-          }
-        });
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
       },
-      { rootMargin: '-10% 0px -10% 0px', threshold: 0.1 }
+      { threshold }
     );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [threshold]);
 
-    items.forEach((it) => obs.observe(it));
-    return () => obs.disconnect();
-  }, []);
-
-  return ref;
+  return [ref, visible];
 }

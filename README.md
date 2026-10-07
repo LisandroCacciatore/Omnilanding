@@ -1,99 +1,78 @@
-# Omnilanding — Portfolio QA + Blog
+# lcacciatore.com
 
-**`lcacciatore.com` sirve tres superficies desde un mismo repo:**
+Personal site for **Lisandro Cacciatore** — Quality & Reliability for AI Systems · Sports Performance Analytics.
 
-| Ruta | Qué es | Tecnología |
-|---|---|---|
-| `/` | **Portfolio QA / AI Evaluation** | React 18 + Vite 5 + Tailwind 3 |
-| `/blog/` | Notas técnicas (automatización, datos, calidad) | HTML estático + Tailwind CDN |
-| `/consultoria/` | Landing comercial: Auditoría Operativa para gimnasios (con captura de leads a Supabase) | HTML estático + Tailwind CDN |
+## Stack
+- React 18 + Vite
+- Tailwind CSS (dark-only)
+- React Router (SPA)
 
-## Por qué el repo está armado así
-
-Vite construye la raíz y **copia `public/` tal cual a `dist/`**. Por eso el blog y la
-landing de consultoría viven en `public/`: no se procesan con React, pero viajan en el
-mismo deploy y siguen disponibles en sus URLs.
-
-```
-public/
-├── blog/          -> https://lcacciatore.com/blog/
-├── consultoria/   -> https://lcacciatore.com/consultoria/
-└── img/           -> assets compartidos por las tres superficies
-tools/
-└── og-cover.html  -> fuente de img/og-qa.png (no se despliega)
-```
-
-> El nav del blog apunta a las secciones de `/consultoria/` (`#problema`, `#consultoria`,
-> `#sobre-mi`, `#techfitness`, `#faq`). Si se mueve la landing, hay que repuntar
-> `public/blog/*/index.html`.
-
-## Comandos
+## Development
 
 ```bash
 npm install
-npm run dev              # http://localhost:5173
-npm run build            # -> dist/
-npm run preview          # sirve dist/ en http://localhost:4173
-npm run verify:render    # verificación de render con aserciones (ver abajo)
+npm run dev
 ```
 
-## Verificación de render
-
-`src/ssr-check.jsx` ejecuta **el árbol real de componentes** por SSR y afirma strings
-esperados por sección: los 3 fixes del rediseño, las anclas del navbar, los contactos
-reales, y que **no** existan los valores falsos que se eliminaron.
+## Build
 
 ```bash
-npm run verify:render
+npm run build
+npm run preview
 ```
 
-Salida esperada: `36 aserciones | fallos: 0 | RENDER OK` y exit code 0.
+## Deploy
+Optimized for **Vercel** (configured in `vercel.json`):
+- Framework: Vite
+- Build command: `npm run build`
+- Output directory: `dist`
+- SPA fallback via rewrite rule (no `404.html` needed)
 
-### Verificar producción
+For GitHub Pages / Netlify: add `public/404.html` with SPA redirect script (see `vercel.json` rewrites for reference).
 
-`tools/verificar-prod.py` comprueba que **la URL publicada realmente monte React**
-(no sólo que el HTML responda 200) y que las tres superficies estén vivas:
+## Structure
+- `src/data/` — All content. Edit here, not in components.
+- `src/components/` — Reusable presentational pieces.
+- `src/sections/` — Page blocks grouped by route.
+- `src/pages/` — Route entry points.
+- `src/styles/blog.css` — Scoped styles for blog post rendering (migrated from old static blog).
 
-```bash
-CH="/c/Program Files/Google/Chrome/Application/chrome.exe"
-OUT="$LOCALAPPDATA/Temp/prod"
-mkdir -p "$OUT"
-for p in "home:/" "blog:/blog/" "consultoria:/consultoria/"; do
-  "$CH" --headless=new --disable-gpu --virtual-time-budget=9000 \
-    --dump-dom "https://lcacciatore.com${p#*:}" > "$OUT/prod-${p%%:*}.html" 2>/dev/null
-done
-python tools/verificar-prod.py "$OUT/prod-home.html" "$OUT/prod-blog.html" "$OUT/prod-consultoria.html"
+## Routes
+| Path | Page | Description |
+|------|------|-------------|
+| `/` | Home | Overview with two pillars (QA/AI, Sports) |
+| `/qa-ai` | QaAi | AI Quality & Evaluation services, case studies, tech stack |
+| `/sport` | Sport | Sports Performance Analytics product, projects, experience |
+| `/about` | About | Full profile, dual-track experience, credentials |
+| `/blog` | Blog | Post index (supports `lang` field) |
+| `/blog/:slug` | BlogPost | Individual post (renders HTML via `dangerouslySetInnerHTML`) |
+| `/contact` | Contact | Channels + direct email |
+| `*` | NotFound | 404 page with links back |
+
+## Blog
+Posts live in `src/data/blog.js`. Each post:
+```js
+{
+  slug: 'post-slug',
+  title: 'Post Title',
+  excerpt: 'Short description for index',
+  date: '2026-01-15',
+  tags: ['Tag1', 'Tag2'],
+  lang: 'en', // or 'es'
+  body: '<h2>HTML content</h2><p>...</p>' // rendered via dangerouslySetInnerHTML
+}
 ```
+The n8n automation post (`automatizacion-clubes-n8n`) is included in Spanish with full HTML from the old static blog.
 
-Salida esperada: `comprobaciones: 16 | fallos: 0 | PROD OK`.
+## Legacy `_old/` folder
+Contains the previous multi-surface implementation (React root + static HTML in `public/blog/`, `public/consultoria/`). **Keep until production deploy is verified.** After confirming the Vercel preview works and the main domain serves the new SPA correctly, delete `_old/`.
 
-## Datos
-
-Todo el contenido vive en `src/data/`. Los componentes son sólo presentación.
-
-| Archivo | Contenido |
-|---|---|
-| `site.js` | identidad, contacto, nav, pipeline y flujos del hero |
-| `capabilities.js` | capacidades de QA y stack enterprise |
-| `aiDimensions.js` | dimensiones de evaluación de AI + framework |
-| `projects.js` | HERMES y Sports Analytics (metodología, sin métricas inventadas) |
-| `experience.js` | trayectoria, strip de stack, bio y cita |
-
-## Regenerar la portada social
-
+## OG Image Regeneration
 ```bash
 "/c/Program Files/Google/Chrome/Application/chrome.exe" --headless=new \
   --window-size=1200,630 --virtual-time-budget=5000 \
   --screenshot=public/img/og-qa.png "file:///$PWD/tools/og-cover.html"
 ```
 
-## Deploy
-
-Vercel, con `framework: vite`, `buildCommand: npm run build`, `outputDirectory: dist`
-(fijado en `vercel.json` para que no dependa de la detección automática). Los rewrites a
-`omnicomrade.vercel.app` (`/app`, `/login`, `/signin`) siguen activos: los archivos
-estáticos se resuelven antes.
-
-## Licencia
-
-© 2026 Lisandro Cacciatore. Todos los derechos reservados.
+## Production Verification
+`tools/verificar-prod.py` checks that the deployed URL mounts React and all routes respond. Update it for new routes if needed (old `consultoria/` route removed).

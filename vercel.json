@@ -18,6 +18,10 @@
     {
       "source": "/app/:path*",
       "destination": "https://omnicomrade.vercel.app/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
