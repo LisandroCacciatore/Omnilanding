@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-surface text-on-surface font-sans antialiased;
+    overscroll-behavior-y: none;
+  }
+  :focus-visible {
+    outline: 2px solid #7c5730;
+    outline-offset: 2px;
+  }
+  ::selection {
+    @apply bg-secondary/20 text-primary;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-surface;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-outline-variant rounded;
+  }
+}
+
+@layer components {
+  /* Card con sombra sutil para el blog (BP Solutions) */
+  .card-blog {
+    border: 1px solid #d1c4bd;
+    box-shadow: 0 2px 8px rgba(21, 14, 10, 0.03);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+  .card-blog:hover {
+    box-shadow: 0 12px 32px rgba(21, 14, 10, 0.08);
+    border-color: #7c5730;
+    transform: translateY(-2px);
+  }
+
+  /* Card con sombra para el blog index */
+  .card-blog-index {
+    border: 1px solid #d1c4bd;
+    background: #ffffff;
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+  .card-blog-index:hover {
+    box-shadow: 0 12px 32px rgba(21, 14, 10, 0.08);
+    border-color: #7c5730;
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
