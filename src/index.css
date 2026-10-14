@@ -11,11 +11,12 @@
     overscroll-behavior-y: none;
   }
   :focus-visible {
-    outline: 2px solid #7c5730;
+    outline: 2px solid #3A5A78;
     outline-offset: 2px;
   }
   ::selection {
-    @apply bg-secondary/20 text-primary;
+    background-color: rgba(58, 90, 120, 0.2);
+    color: #152A45;
   }
   ::-webkit-scrollbar {
     width: 8px;
@@ -30,28 +31,28 @@
 }
 
 @layer components {
-  /* Card con sombra sutil para el blog (BP Solutions) */
+  /* Card con sombra sutil para el blog */
   .card-blog {
-    border: 1px solid #d1c4bd;
+    border: 1px solid #D6D3CE;
     box-shadow: 0 2px 8px rgba(21, 14, 10, 0.03);
     transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   }
   .card-blog:hover {
-    box-shadow: 0 12px 32px rgba(21, 14, 10, 0.08);
-    border-color: #7c5730;
+    box-shadow: 0 12px 32px rgba(58, 90, 120, 0.10);
+    border-color: #3A5A78;
     transform: translateY(-2px);
   }
 
-  /* Card con sombra para el blog index */
+  /* Card para el blog index */
   .card-blog-index {
-    border: 1px solid #d1c4bd;
-    background: #ffffff;
+    border: 1px solid #D6D3CE;
+    background: #FFFFFF;
     border-radius: 12px;
     transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   }
   .card-blog-index:hover {
-    box-shadow: 0 12px 32px rgba(21, 14, 10, 0.08);
-    border-color: #7c5730;
+    box-shadow: 0 12px 32px rgba(58, 90, 120, 0.10);
+    border-color: #3A5A78;
     transform: translateY(-2px);
   }
 }
