@@ -11,11 +11,11 @@
     overscroll-behavior-y: none;
   }
   :focus-visible {
-    outline: 2px solid #3A5A78;
+    outline: 2px solid #2C4A66;
     outline-offset: 2px;
   }
   ::selection {
-    background-color: rgba(58, 90, 120, 0.2);
+    background-color: rgba(44, 74, 102, 0.2);
     color: #152A45;
   }
   ::-webkit-scrollbar {
@@ -31,28 +31,25 @@
 }
 
 @layer components {
-  /* Card con sombra sutil para el blog */
   .card-blog {
-    border: 1px solid #D6D3CE;
+    border: 1px solid #C4C0B9;
     box-shadow: 0 2px 8px rgba(21, 14, 10, 0.03);
     transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   }
   .card-blog:hover {
-    box-shadow: 0 12px 32px rgba(58, 90, 120, 0.10);
-    border-color: #3A5A78;
+    box-shadow: 0 12px 32px rgba(44, 74, 102, 0.10);
+    border-color: #2C4A66;
     transform: translateY(-2px);
   }
-
-  /* Card para el blog index */
   .card-blog-index {
-    border: 1px solid #D6D3CE;
+    border: 1px solid #C4C0B9;
     background: #FFFFFF;
     border-radius: 12px;
     transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   }
   .card-blog-index:hover {
-    box-shadow: 0 12px 32px rgba(58, 90, 120, 0.10);
-    border-color: #3A5A78;
+    box-shadow: 0 12px 32px rgba(44, 74, 102, 0.10);
+    border-color: #2C4A66;
     transform: translateY(-2px);
   }
 }
