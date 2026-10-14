@@ -5,45 +5,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ─── Fondos ────────────────────────────────────────────
-        surface: surface: {
-  DEFAULT: '#F2EFEA',           // era #FAF8F5 — más cálido, menos brillante
-  bright: '#FAF8F5',            // era #FFFFFF — para cards que quieras destacar
-  dim: '#E8E5E0',               // era #F2EFEA
-  'container-lowest': '#FFFFFF',
-  'container-low': '#EDEAE4',   // era #F7F4EF
-  container: '#E8E5DF',         // era #F0EDE8
-  'container-high': '#E0DDD7',  // era #E8E5E0
-  'container-highest': '#D8D5CF', // era #E0DDD8
-  variant: '#E0DDD7',
-},
-        background: '#FAF8F5',
-
-        // ─── Acento principal · navy ───────────────────────────
+        surface: {
+          DEFAULT: '#F2EFEA',
+          bright: '#FAF8F5',
+          dim: '#E8E5E0',
+          'container-lowest': '#FFFFFF',
+          'container-low': '#EDEAE4',
+          container: '#E8E5DF',
+          'container-high': '#E0DDD7',
+          'container-highest': '#D8D5CF',
+          variant: '#E0DDD7',
+        },
+        background: '#F2EFEA',
         primary: {
-  DEFAULT: '#2C4A66',           // era #3A5A78 — más profundo
-  hover: '#152A45',             // era #1E3A5F
-  container: '#DCE5EE',         // era #E8EEF4
-  dark: '#0F1F33',              // era #152A45
-},
+          DEFAULT: '#2C4A66',
+          hover: '#152A45',
+          container: '#DCE5EE',
+          dark: '#0F1F33',
+        },
         secondary: {
-          DEFAULT: '#6B8FA3',           // azul claro para hover secundario
+          DEFAULT: '#6B8FA3',
           container: '#D6E3EC',
         },
-
-        // ─── Texto ─────────────────────────────────────────────
-       'on-surface': '#1F1F1F',        // era #2E2E2E — más negro
-'on-surface-variant': '#4A4A4A', // era #5A5A5A — más oscuro
-        'on-background': '#2E2E2E',
+        'on-surface': '#1F1F1F',
+        'on-surface-variant': '#4A4A4A',
+        'on-background': '#1F1F1F',
         'on-primary': '#FFFFFF',
-
-        // ─── Bordes ────────────────────────────────────────────
         outline: {
-  DEFAULT: '#6B6B6B',           // era #8A8A8A — más oscuro, más presencia
-  variant: '#C4C0B9',           // era #D6D3CE — más marcado
-},
-
-        // ─── Estados ───────────────────────────────────────────
+          DEFAULT: '#6B6B6B',
+          variant: '#C4C0B9',
+        },
         error: '#B23A3A',
         'error-container': '#F5D6D6',
         'on-error': '#FFFFFF',
