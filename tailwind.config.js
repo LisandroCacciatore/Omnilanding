@@ -5,50 +5,49 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Paleta principal
+        // ─── Fondos ────────────────────────────────────────────
+        surface: {
+          DEFAULT: '#FAF8F5',           // blanco cálido
+          bright: '#FFFFFF',             // blanco puro
+          dim: '#F2EFEA',                // secciones alternas
+          'container-lowest': '#FFFFFF', // cards
+          'container-low': '#F7F4EF',
+          container: '#F0EDE8',
+          'container-high': '#E8E5E0',
+          'container-highest': '#E0DDD8',
+          variant: '#E8E5E0',
+        },
+        background: '#FAF8F5',
+
+        // ─── Acento principal · navy ───────────────────────────
         primary: {
-          DEFAULT: '#150e0a',
-          container: '#2b231e',
+          DEFAULT: '#3A5A78',           // CTAs, links, acentos
+          hover: '#1E3A5F',             // hover
+          container: '#E8EEF4',         // fondo suave
+          dark: '#152A45',              // bloques oscuros
         },
         secondary: {
-          DEFAULT: '#7c5730',
-          container: '#fdcb9b',
-          fixed: '#ffdcbd',
-          'fixed-dim': '#eebd8e',
+          DEFAULT: '#6B8FA3',           // azul claro para hover secundario
+          container: '#D6E3EC',
         },
-        tertiary: {
-          DEFAULT: '#180d07',
-          container: '#2f221a',
-        },
-        surface: {
-          DEFAULT: '#fcf9f2',
-          bright: '#fcf9f2',
-          dim: '#dcdad3',
-          variant: '#e5e2db',
-          'container-lowest': '#ffffff',
-          'container-low': '#f7f4ec',
-          container: '#f1eee7',
-          'container-high': '#ebe8e1',
-          'container-highest': '#e5e2db',
-        },
-        background: '#fcf9f2',
+
+        // ─── Texto ─────────────────────────────────────────────
+        'on-surface': '#2E2E2E',        // texto principal
+        'on-surface-variant': '#5A5A5A', // texto secundario
+        'on-background': '#2E2E2E',
+        'on-primary': '#FFFFFF',
+
+        // ─── Bordes ────────────────────────────────────────────
         outline: {
-          DEFAULT: '#7f756f',
-          variant: '#d1c4bd',
+          DEFAULT: '#8A8A8A',
+          variant: '#D6D3CE',
         },
-        'on-primary': '#ffffff',
-        'on-primary-container': '#968982',
-        'on-secondary': '#ffffff',
-        'on-secondary-container': '#79542d',
-        'on-surface': '#1c1c18',
-        'on-surface-variant': '#4e4540',
-        'on-background': '#1c1c18',
-        'on-tertiary': '#ffffff',
-        'on-tertiary-container': '#b8a49a',
-        error: '#ba1a1a',
-        'error-container': '#ffdad6',
-        'on-error': '#ffffff',
-        'on-error-container': '#93000a',
+
+        // ─── Estados ───────────────────────────────────────────
+        error: '#B23A3A',
+        'error-container': '#F5D6D6',
+        'on-error': '#FFFFFF',
+        'on-error-container': '#7A1F1F',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
