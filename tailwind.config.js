@@ -6,42 +6,42 @@ export default {
     extend: {
       colors: {
         // ─── Fondos ────────────────────────────────────────────
-        surface: {
-          DEFAULT: '#FAF8F5',           // blanco cálido
-          bright: '#FFFFFF',             // blanco puro
-          dim: '#F2EFEA',                // secciones alternas
-          'container-lowest': '#FFFFFF', // cards
-          'container-low': '#F7F4EF',
-          container: '#F0EDE8',
-          'container-high': '#E8E5E0',
-          'container-highest': '#E0DDD8',
-          variant: '#E8E5E0',
-        },
+        surface: surface: {
+  DEFAULT: '#F2EFEA',           // era #FAF8F5 — más cálido, menos brillante
+  bright: '#FAF8F5',            // era #FFFFFF — para cards que quieras destacar
+  dim: '#E8E5E0',               // era #F2EFEA
+  'container-lowest': '#FFFFFF',
+  'container-low': '#EDEAE4',   // era #F7F4EF
+  container: '#E8E5DF',         // era #F0EDE8
+  'container-high': '#E0DDD7',  // era #E8E5E0
+  'container-highest': '#D8D5CF', // era #E0DDD8
+  variant: '#E0DDD7',
+},
         background: '#FAF8F5',
 
         // ─── Acento principal · navy ───────────────────────────
         primary: {
-          DEFAULT: '#3A5A78',           // CTAs, links, acentos
-          hover: '#1E3A5F',             // hover
-          container: '#E8EEF4',         // fondo suave
-          dark: '#152A45',              // bloques oscuros
-        },
+  DEFAULT: '#2C4A66',           // era #3A5A78 — más profundo
+  hover: '#152A45',             // era #1E3A5F
+  container: '#DCE5EE',         // era #E8EEF4
+  dark: '#0F1F33',              // era #152A45
+},
         secondary: {
           DEFAULT: '#6B8FA3',           // azul claro para hover secundario
           container: '#D6E3EC',
         },
 
         // ─── Texto ─────────────────────────────────────────────
-        'on-surface': '#2E2E2E',        // texto principal
-        'on-surface-variant': '#5A5A5A', // texto secundario
+       'on-surface': '#1F1F1F',        // era #2E2E2E — más negro
+'on-surface-variant': '#4A4A4A', // era #5A5A5A — más oscuro
         'on-background': '#2E2E2E',
         'on-primary': '#FFFFFF',
 
         // ─── Bordes ────────────────────────────────────────────
         outline: {
-          DEFAULT: '#8A8A8A',
-          variant: '#D6D3CE',
-        },
+  DEFAULT: '#6B6B6B',           // era #8A8A8A — más oscuro, más presencia
+  variant: '#C4C0B9',           // era #D6D3CE — más marcado
+},
 
         // ─── Estados ───────────────────────────────────────────
         error: '#B23A3A',
