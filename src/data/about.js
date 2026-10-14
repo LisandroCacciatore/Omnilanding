@@ -7,7 +7,7 @@ export const about = {
     'Esa pregunta es exactamente la que me hago hoy cuando diseño un sistema de IA para un estudio. No me interesa que la demo funcione. Me interesa que funcione el lunes cuando el cliente manda un PDF escaneado a las 8 de la mañana.',
     'También desarrollo proyectos de IA aplicada a las ciencias del deporte, donde se cruzan mi formación en Educación Física, los datos y la tecnología.',
   ],
-  image: '/images/about/lisandro-portrait.jpg',
+  image: '/images/about/lisandro-portrait.jpeg',
   imageAlt: 'Lisandro Cacciatore, especialista en IA y QA Systems',
   name: 'Lisandro Cacciatore',
   role: 'Especialista en IA & QA Systems',
